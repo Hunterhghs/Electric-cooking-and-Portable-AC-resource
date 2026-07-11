@@ -69,8 +69,6 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
 .nav-tab{font-size:.82rem;font-weight:500;color:var(--c-text2);text-decoration:none;padding:.5rem .85rem;border-radius:var(--radius-sm);transition:all .15s;cursor:pointer;background:none;border:none;font-family:inherit;white-space:nowrap}
 .nav-tab:hover{color:var(--c-text);background:var(--c-border2)}
 .nav-tab.active{color:var(--c-clean);background:var(--c-clean-bg);font-weight:600}
-.theme-toggle{background:none;border:1px solid var(--c-border);border-radius:var(--radius-sm);padding:5px 8px;cursor:pointer;font-size:.85rem;color:var(--c-text2);display:flex;align-items:center;gap:3px;transition:all .15s;margin-left:.5rem;flex-shrink:0}
-.theme-toggle:hover{background:var(--c-border2);color:var(--c-text)}
 
 /* ===== VIEW SYSTEM ===== */
 .view{display:none}
@@ -220,8 +218,6 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
       <button class="nav-tab" role="tab" aria-selected="false" data-view="report">Digital Report</button>
       <button class="nav-tab optional" role="tab" aria-selected="false" data-view="informational">Informational</button>
     </div>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">☀️</button>
-  </div>
 </nav>
 
 <main id="main-content">
@@ -591,24 +587,6 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
 <!-- Chart.js — loaded before inline init scripts (no defer, to avoid timing issues) -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <script>
-// ===== THEME =====
-(function(){
-  const toggle = document.getElementById('themeToggle');
-  const html = document.documentElement;
-  const saved = localStorage.getItem('theme');
-  if (saved === 'dark') { html.classList.add('dark'); html.classList.remove('light'); toggle.textContent = '🌙'; }
-  toggle.addEventListener('click', () => {
-    if (html.classList.contains('dark')) {
-      html.classList.remove('dark'); html.classList.add('light');
-      toggle.textContent = '☀️'; localStorage.setItem('theme','light');
-    } else {
-      html.classList.add('dark'); html.classList.remove('light');
-      toggle.textContent = '🌙'; localStorage.setItem('theme','dark');
-    }
-    updateAllChartColors();
-  });
-})();
-
 // ===== VIEW NAVIGATION =====
 (function(){
   const navTabs = document.querySelectorAll('.nav-tab');
