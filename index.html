@@ -434,16 +434,32 @@ button,a,[role="tab"]{touch-action:manipulation;-webkit-tap-highlight-color:tran
         <canvas id="dashDiseaseChart" role="img" aria-label="Horizontal bar chart: Ischemic heart disease 32%, Stroke 23%, LRI 21%, COPD 19%, Lung cancer 6%"></canvas>
       </div>
       <div class="dash-chart-card" data-category="cooking">
+        <div class="dash-chart-title">Population Without Clean Cooking Access (2010–2030)</div>
+        <canvas id="dashPopChart" role="img" aria-label="Line chart showing global and Sub-Saharan Africa populations without clean cooking, with Africa rising despite global progress"></canvas>
+      </div>
+      <div class="dash-chart-card" data-category="cooking">
         <div class="dash-chart-title">PM₂.₅ Exposure: Indoor Cooking vs. WHO Safe Limit</div>
         <canvas id="dashPm25Chart" role="img" aria-label="Bar chart comparing indoor PM2.5 from biomass cooking to the WHO safe limit"></canvas>
+      </div>
+      <div class="dash-chart-card" data-category="cooking">
+        <div class="dash-chart-title">Annual Forest Loss from Fuelwood Collection</div>
+        <canvas id="dashForestChart" role="img" aria-label="Bar chart: annual forest loss ~7 million hectares, equivalent to the land area of Ireland"></canvas>
       </div>
       <div class="dash-chart-card" data-category="cooking">
         <div class="dash-chart-title">Clean Cooking Investment Gap</div>
         <canvas id="dashInvestmentChart" role="img" aria-label="Bar chart: $2.2B pledged vs $150B needed annually"></canvas>
       </div>
       <div class="dash-chart-card" data-category="cooling">
+        <div class="dash-chart-title">Heat-Related Mortality: Over-65s Trend (2000–2025)</div>
+        <canvas id="dashHeatChart" role="img" aria-label="Line chart showing 85% increase in heat-related deaths among over-65s since early 2000s"></canvas>
+      </div>
+      <div class="dash-chart-card" data-category="cooling">
         <div class="dash-chart-title">Global HFC Emissions Trajectory (2025–2050)</div>
         <canvas id="dashHfcChart" role="img" aria-label="Line chart showing HFC emissions growing at 8% annually, reaching 7–19% of global CO2 by 2050"></canvas>
+      </div>
+      <div class="dash-chart-card" data-category="cooling">
+        <div class="dash-chart-title">PAYG Solar & Appliance Customer Growth</div>
+        <canvas id="dashPaygChart" role="img" aria-label="Line chart showing PAYG customer growth from 0.5M in 2015 to over 4M in 2025, led by M-KOPA and industry"></canvas>
       </div>
       <div class="dash-chart-card" data-category="all">
         <div class="dash-chart-title">Global Black Carbon Sources</div>
@@ -997,13 +1013,124 @@ function createHfcChart(canvasId) {
   });
 }
 
+// ===== CHART: Population Without Clean Cooking (Dashboard) =====
+function createPopChart(canvasId) {
+  const ctx = document.getElementById(canvasId);
+  if (!ctx) return;
+  if (allCharts[canvasId]) allCharts[canvasId].destroy();
+  allCharts[canvasId] = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['2010','2015','2020','2025','2030'],
+      datasets: [
+        { label: 'Global Total', data: [2.8, 2.6, 2.45, 2.3, 2.5], borderColor: '#c2410c', backgroundColor: 'rgba(194,65,12,0.08)', fill: true, tension: 0.3, borderWidth: 2, pointRadius: 3, pointBackgroundColor: '#c2410c' },
+        { label: 'Sub-Saharan Africa', data: [0.65, 0.75, 0.85, 0.92, 1.05], borderColor: '#d97706', backgroundColor: 'rgba(217,119,6,0.08)', fill: true, tension: 0.3, borderWidth: 2, pointRadius: 3, pointBackgroundColor: '#d97706', borderDash: [5,3] },
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: true,
+      plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 16, font: { size: 10 } } }, tooltip: { callbacks: { label: c => c.raw + 'B people' } } },
+      scales: {
+        y: { title: { display: true, text: 'Billions of People' }, ticks: { callback: v => v + 'B' }, min: 0, grid: { color: gridColor() } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+}
+
+// ===== CHART: Forest Loss (Dashboard) =====
+function createForestChart(canvasId) {
+  const ctx = document.getElementById(canvasId);
+  if (!ctx) return;
+  if (allCharts[canvasId]) allCharts[canvasId].destroy();
+  allCharts[canvasId] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Annual Fuelwood Loss','Ireland (Reference)'],
+      datasets: [{
+        data: [7.0, 7.0],
+        backgroundColor: ['#c2410c','#8c8c8c'],
+        borderRadius: 6,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: true,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.raw + ' million hectares/year' } } },
+      scales: {
+        y: { title: { display: true, text: 'Million Hectares per Year' }, ticks: { callback: v => v + ' Mha' }, grid: { color: gridColor() } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+}
+
+// ===== CHART: Heat Mortality Trend (Dashboard) =====
+function createHeatChart(canvasId) {
+  const ctx = document.getElementById(canvasId);
+  if (!ctx) return;
+  if (allCharts[canvasId]) allCharts[canvasId].destroy();
+  allCharts[canvasId] = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['2000','2005','2010','2015','2020','2025'],
+      datasets: [{
+        label: 'Over-65s Heat Mortality Index (2000=100)',
+        data: [100, 115, 130, 150, 170, 185],
+        borderColor: '#dc2626',
+        backgroundColor: 'rgba(220,38,38,0.08)',
+        fill: true, tension: 0.3, borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: '#dc2626',
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { title: { display: true, text: 'Mortality Index (2000=100)' }, min: 90, grid: { color: gridColor() } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+}
+
+// ===== CHART: PAYG Growth (Dashboard) =====
+function createPaygChart(canvasId) {
+  const ctx = document.getElementById(canvasId);
+  if (!ctx) return;
+  if (allCharts[canvasId]) allCharts[canvasId].destroy();
+  allCharts[canvasId] = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['2015','2017','2019','2021','2023','2025'],
+      datasets: [{
+        label: 'Total PAYG Customers (Millions)',
+        data: [0.5, 1.0, 2.0, 2.5, 3.2, 4.2],
+        borderColor: '#0d9488',
+        backgroundColor: 'rgba(13,148,136,0.1)',
+        fill: true, tension: 0.3, borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: '#0d9488',
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: true,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.raw + 'M customers' } } },
+      scales: {
+        y: { title: { display: true, text: 'Millions of Customers' }, ticks: { callback: v => v + 'M' }, min: 0, grid: { color: gridColor() } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+}
+
 // ===== INIT ALL CHARTS =====
 function initAllCharts() {
   // Dashboard view charts
   createDiseaseChart('dashDiseaseChart');
+  createPopChart('dashPopChart');
   createPm25Chart('dashPm25Chart');
+  createForestChart('dashForestChart');
   createInvestmentChart('dashInvestmentChart');
+  createHeatChart('dashHeatChart');
   createHfcChart('dashHfcChart');
+  createPaygChart('dashPaygChart');
   createBlackCarbonChart('dashBlackCarbonChart');
   // Report view charts
   createEfficiencyChart('reportEfficiencyChart');
