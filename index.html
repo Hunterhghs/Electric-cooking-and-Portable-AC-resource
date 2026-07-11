@@ -15,11 +15,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js" defer></script>
 <style>
 /* ===== RESET & BASE ===== */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:80px;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 body{font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:1rem;line-height:1.75;color:#1a1a1a;background:#fbfbf9;overflow-x:hidden}
 
 /* ===== DESIGN TOKENS ===== */
@@ -27,7 +28,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:1rem;line-
   --c-accent-cooking:#c2410c;--c-accent-cooking-light:#fff7ed;
   --c-accent-cooling:#0369a1;--c-accent-cooling-light:#f0f9ff;
   --c-accent-clean:#0d9488;--c-accent-clean-light:#f0fdfa;
-  --c-text:#1a1a1a;--c-text-secondary:#5c5c5c;--c-text-muted:#8c8c8c;
+  --c-text:#1a1a1a;--c-text-secondary:#5c5c5c;--c-text-muted:#666666;
   --c-bg:#fbfbf9;--c-surface:#ffffff;--c-border:#e5e5e0;--c-border-light:#f0f0eb;
   --c-dashboard-bg:#f5f5f0;
   --shadow-sm:0 1px 2px rgba(0,0,0,.04);--shadow-md:0 4px 12px rgba(0,0,0,.06);--shadow-lg:0 12px 40px rgba(0,0,0,.08);
@@ -35,7 +36,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:1rem;line-
   --content-max:720px;--dashboard-w:380px;--nav-h:64px;
 }
 .dark{
-  --c-text:#e8e8e4;--c-text-secondary:#a8a8a4;--c-text-muted:#787874;
+  --c-text:#e8e8e4;--c-text-secondary:#a8a8a4;--c-text-muted:#91918c;
   --c-bg:#141412;--c-surface:#1c1c1a;--c-border:#2c2c28;--c-border-light:#242420;
   --c-dashboard-bg:#1a1a18;
   --c-accent-cooking-light:#2a1a10;--c-accent-cooling-light:#0a1a2a;--c-accent-clean-light:#0a1a18;
@@ -71,6 +72,12 @@ strong{font-weight:600}
 .nav-links a:hover{color:var(--c-text)}
 .theme-toggle{background:none;border:1px solid var(--c-border);border-radius:var(--radius-sm);padding:6px 10px;cursor:pointer;font-size:.85rem;color:var(--c-text-secondary);display:flex;align-items:center;gap:4px;transition:all .15s}
 .theme-toggle:hover{background:var(--c-border-light);color:var(--c-text)}
+:focus-visible{outline:2px solid var(--c-accent-clean);outline-offset:2px;border-radius:2px}
+button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
+
+/* ===== SKIP LINK ===== */
+.skip-link{position:absolute;top:-100%;left:1rem;z-index:100;padding:.5rem 1rem;background:var(--c-accent-clean);color:#fff;font-size:.85rem;font-weight:500;border-radius:var(--radius-sm);text-decoration:none}
+.skip-link:focus{top:.5rem}
 
 /* ===== HERO ===== */
 .hero{padding:4rem 2rem 3rem;max-width:var(--content-max);margin:0 auto}
@@ -222,8 +229,10 @@ strong{font-weight:600}
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 <div class="site-wrapper">
   <div class="content-col">
+    <main id="main-content">
     <!-- NAVIGATION -->
     <nav class="site-nav" role="navigation" aria-label="Main navigation">
       <a href="#" class="nav-brand"><span class="nav-brand-dot"></span>H Heuristics</a>
@@ -494,8 +503,9 @@ strong{font-weight:600}
       </div>
     </section>
 
+    </main>
     <!-- FOOTER -->
-    <footer class="site-footer">
+    <footer class="site-footer" role="contentinfo">
       <p class="site-footer-brand">H Heuristics</p>
       <h4>Sources</h4>
       <p>IEA — <em>A Vision for Clean Cooking Access for All</em> (2023); <em>Clean Cooking in Africa</em> (2026); <em>The Future of Cooling</em> (2018). WHO — <em>Household Air Pollution Fact Sheet</em> (Dec 2025); <em>Heat and Health Fact Sheet</em> (April 2026). SEforALL — <em>Chilling Prospects</em> (2023); <em>eCooking Practical Guide</em> (April 2026). MECS/Modern Energy Cooking Services. Clean Cooking Alliance. Clean Cooling Collaborative / ClimateWorks Foundation. UNEP OzonAction. World Bank / ESMAP. GOGLA. <em>The Lancet Planetary Health.</em> <em>The Lancet Countdown.</em></p>
@@ -511,9 +521,9 @@ strong{font-weight:600}
       </div>
 
       <div class="dashboard-tabs" role="tablist" aria-label="Dashboard view">
-        <button class="dashboard-tab active" role="tab" data-view="overview">Overview</button>
-        <button class="dashboard-tab" role="tab" data-view="cooking">Cooking</button>
-        <button class="dashboard-tab" role="tab" data-view="cooling">Cooling</button>
+        <button class="dashboard-tab active" role="tab" aria-selected="true" data-view="overview">Overview</button>
+        <button class="dashboard-tab" role="tab" aria-selected="false" data-view="cooking">Cooking</button>
+        <button class="dashboard-tab" role="tab" aria-selected="false" data-view="cooling">Cooling</button>
       </div>
 
       <div class="dashboard-kpis">
@@ -587,8 +597,9 @@ mobileOverlay.addEventListener('click', closeMobileDashboard);
 const dashboardTabs = document.querySelectorAll('.dashboard-tab');
 dashboardTabs.forEach(tab => {
   tab.addEventListener('click', () => {
-    dashboardTabs.forEach(t => t.classList.remove('active'));
+    dashboardTabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
     tab.classList.add('active');
+    tab.setAttribute('aria-selected','true');
     updateDashboardView(tab.dataset.view);
   });
 });
