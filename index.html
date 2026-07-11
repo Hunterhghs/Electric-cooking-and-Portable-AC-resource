@@ -434,8 +434,16 @@ button,a,[role="tab"]{touch-action:manipulation;-webkit-tap-highlight-color:tran
         <canvas id="dashDiseaseChart" role="img" aria-label="Horizontal bar chart: Ischemic heart disease 32%, Stroke 23%, LRI 21%, COPD 19%, Lung cancer 6%"></canvas>
       </div>
       <div class="dash-chart-card" data-category="cooking">
+        <div class="dash-chart-title">PM₂.₅ Exposure: Indoor Cooking vs. WHO Safe Limit</div>
+        <canvas id="dashPm25Chart" role="img" aria-label="Bar chart comparing indoor PM2.5 from biomass cooking to the WHO safe limit"></canvas>
+      </div>
+      <div class="dash-chart-card" data-category="cooking">
         <div class="dash-chart-title">Clean Cooking Investment Gap</div>
         <canvas id="dashInvestmentChart" role="img" aria-label="Bar chart: $2.2B pledged vs $150B needed annually"></canvas>
+      </div>
+      <div class="dash-chart-card" data-category="cooling">
+        <div class="dash-chart-title">Global HFC Emissions Trajectory (2025–2050)</div>
+        <canvas id="dashHfcChart" role="img" aria-label="Line chart showing HFC emissions growing at 8% annually, reaching 7–19% of global CO2 by 2050"></canvas>
       </div>
       <div class="dash-chart-card" data-category="all">
         <div class="dash-chart-title">Global Black Carbon Sources</div>
@@ -932,11 +940,70 @@ function createReportInvestmentChart(canvasId) {
   });
 }
 
+// ===== CHART: PM2.5 Exposure (Dashboard) =====
+function createPm25Chart(canvasId) {
+  const ctx = document.getElementById(canvasId);
+  if (!ctx) return;
+  if (allCharts[canvasId]) allCharts[canvasId].destroy();
+  allCharts[canvasId] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Indoor Biomass Cooking','WHO Safe Limit'],
+      datasets: [{
+        data: [1500, 15],
+        backgroundColor: ['#c2410c','#0d9488'],
+        borderRadius: 6,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: true,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.raw + ' µg/m³' } } },
+      scales: {
+        y: { type: 'logarithmic', title: { display: true, text: 'PM₂.₅ (µg/m³, log scale)' }, ticks: { callback: v => v }, grid: { color: gridColor() } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+}
+
+// ===== CHART: HFC Emissions Trajectory (Dashboard) =====
+function createHfcChart(canvasId) {
+  const ctx = document.getElementById(canvasId);
+  if (!ctx) return;
+  if (allCharts[canvasId]) allCharts[canvasId].destroy();
+  const years = ['2025','2030','2035','2040','2045','2050'];
+  // HFC emissions index (2025 = 100), growing at ~8% annually
+  const hfcIndex = [100, 147, 216, 317, 466, 685];
+  // Percentage of global CO2 emissions
+  const pctCo2 = [2.5, 4.1, 6.7, 10.9, 14.5, 19.0];
+  allCharts[canvasId] = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: years,
+      datasets: [
+        { label: 'HFC Emissions Index (2025=100)', data: hfcIndex, borderColor: '#c2410c', backgroundColor: 'rgba(194,65,12,0.08)', fill: true, tension: 0.3, borderWidth: 2, pointRadius: 3, pointBackgroundColor: '#c2410c', yAxisID: 'y' },
+        { label: '% of Global CO₂ Emissions', data: pctCo2, borderColor: '#0369a1', backgroundColor: 'rgba(3,105,161,0.06)', fill: true, tension: 0.3, borderWidth: 2, pointRadius: 3, pointBackgroundColor: '#0369a1', yAxisID: 'y1', borderDash: [5,3] },
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: true,
+      plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 16, font: { size: 10 } } } },
+      scales: {
+        y: { type: 'linear', position: 'left', title: { display: true, text: 'Emissions Index (2025=100)' }, grid: { color: gridColor() } },
+        y1: { type: 'linear', position: 'right', title: { display: true, text: '% of Global CO₂' }, grid: { display: false }, min: 0, max: 22 },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+}
+
 // ===== INIT ALL CHARTS =====
 function initAllCharts() {
   // Dashboard view charts
   createDiseaseChart('dashDiseaseChart');
+  createPm25Chart('dashPm25Chart');
   createInvestmentChart('dashInvestmentChart');
+  createHfcChart('dashHfcChart');
   createBlackCarbonChart('dashBlackCarbonChart');
   // Report view charts
   createEfficiencyChart('reportEfficiencyChart');
