@@ -54,6 +54,7 @@ a:hover{color:var(--c-clean)}
 strong{font-weight:600}
 :focus-visible{outline:2px solid var(--c-clean);outline-offset:2px;border-radius:2px}
 button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
+button,a,[role="tab"]{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 
 /* ===== SKIP LINK ===== */
 .skip-link{position:absolute;top:-100%;left:1rem;z-index:100;padding:.5rem 1rem;background:var(--c-clean);color:#fff;font-size:.85rem;font-weight:500;border-radius:var(--radius-sm);text-decoration:none}
@@ -184,23 +185,63 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
   .dashboard-kpi-row{grid-template-columns:repeat(2,1fr)}
   .dashboard-grid{grid-template-columns:1fr}
   .overview-grid{grid-template-columns:1fr}
+  .overview-stat-row{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:768px){
+  .site-nav{padding:0 .5rem;height:52px}
+  :root{--nav-h:52px}
+  .nav-brand{font-size:.85rem;gap:.3rem}
+  .nav-brand-dot{width:5px;height:5px}
+  .nav-tab{font-size:.72rem;padding:.45rem .55rem;min-height:36px;display:inline-flex;align-items:center}
   .hero-stats{grid-template-columns:1fr 1fr;gap:.5rem}
-  .hero-stat{padding:.85rem}
-  .hero-stat-value{font-size:1.3rem}
-  .overview-hero,.view-content,.view-wide{padding-left:1rem;padding-right:1rem}
-  .nav-tab{font-size:.75rem;padding:.4rem .5rem}
-  .nav-brand{font-size:.9rem}
-  .cycle-comparison{grid-template-columns:1fr}
-  .stat-mini-grid{grid-template-columns:1fr}
-  .site-nav{padding:0 .75rem}
-  .policy-list li{flex-direction:column;gap:.35rem}
+  .hero-stat{padding:.75rem .6rem}
+  .hero-stat-value{font-size:1.2rem}
+  .hero-stat-label{font-size:.7rem}
+  .overview-hero,.view-content,.view-wide{padding-left:.75rem;padding-right:.75rem}
+  .overview-hero{padding-top:1.5rem}
+  .overview-subtitle{font-size:1rem;line-height:1.65}
+  .overview-section{margin-top:1.75rem}
+  .overview-section h2{font-size:1.2rem}
+  .overview-stat-row{grid-template-columns:1fr 1fr;gap:.5rem}
+  .overview-stat-sm{padding:.75rem}
+  .overview-stat-sm .val{font-size:1.1rem}
+  .overview-stat-sm .lbl{font-size:.68rem}
+  .overview-cta{flex-direction:column;gap:.5rem}
+  .overview-cta-btn{width:100%;justify-content:center;padding:.65rem 1rem;font-size:.82rem;min-height:44px}
+  .cycle-comparison{grid-template-columns:1fr;gap:.85rem}
+  .stat-mini-grid{grid-template-columns:1fr;gap:.5rem}
+  .callout{padding:.85rem 1rem;margin:1rem 0}
+  .callout p{font-size:.85rem}
+  .policy-list li{flex-direction:column;gap:.25rem;padding:.85rem 0}
+  .policy-num{font-size:1.25rem}
+  .policy-body h4{font-size:.95rem}
+  .conclusion-box{padding:1.25rem}
+  .conclusion-box p{font-size:.92rem}
+  .mech-card{padding:1rem}
+  .mech-num{font-size:1.4rem}
+  .mech-card h3{font-size:1rem}
+  .dash-chart-card,.report-chart-box{padding:1rem}
+  .dash-tab{font-size:.7rem;padding:.4rem .35rem;min-height:36px;display:inline-flex;align-items:center;justify-content:center}
+  .dashboard-kpi-row{grid-template-columns:1fr 1fr;gap:.5rem}
+  .dash-kpi{padding:.75rem}
+  .dash-kpi-val{font-size:1.15rem}
+  .report-section h2{font-size:1.2rem}
+  .site-footer{padding:1.5rem .75rem;font-size:.75rem}
+  h1{font-size:clamp(1.4rem,3.5vw,2.2rem)}
+  h2{font-size:clamp(1.15rem,2.5vw,1.5rem)}
+  h3{font-size:clamp(1rem,2vw,1.15rem)}
+  p{font-size:.9rem;line-height:1.65}
+  body{font-size:.9rem}
 }
 @media(max-width:480px){
-  .hero-stats{grid-template-columns:1fr}
-  .dashboard-kpi-row{grid-template-columns:1fr 1fr}
+  .hero-stats{grid-template-columns:1fr;gap:.4rem}
+  .overview-stat-row{grid-template-columns:1fr;gap:.4rem}
+  .dashboard-kpi-row{grid-template-columns:1fr 1fr;gap:.4rem}
   .conclusion-box{padding:1rem}
+  .nav-tab{font-size:.68rem;padding:.4rem .4rem}
+  .nav-tabs{gap:.15rem}
+  .site-nav{padding:0 .35rem}
+  .report-chart-box canvas,.dash-chart-card canvas{max-height:220px}
 }
 </style>
 </head>
