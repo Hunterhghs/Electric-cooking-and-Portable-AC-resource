@@ -433,12 +433,6 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
         <p><strong>Indoor air pollution from biomass cooking kills 2.9 million people every year</strong> — more than HIV/AIDS, malaria, and tuberculosis combined. Indoor PM<sub>2.5</sub> concentrations routinely exceed WHO safe limits by 100×. Children under five account for over 309,000 of these deaths annually.</p>
       </div>
 
-      <div class="report-chart-box">
-        <div class="report-chart-title">Disease Burden from Household Air Pollution</div>
-        <canvas id="reportDiseaseChart" role="img" aria-label="Disease burden: Ischemic heart disease 32%, Stroke 23%, Lower respiratory infections 21%, COPD 19%, Lung cancer 6%"></canvas>
-        <figcaption>Source: WHO Household Air Pollution Fact Sheet (2025).</figcaption>
-      </div>
-
       <p>Residential solid-fuel burning produces roughly <strong>a quarter of all global black carbon emissions</strong> — a short-lived climate pollutant with a warming impact 460–1,500× that of CO₂ over a 20-year horizon. Wood and charcoal collection drives <strong>forest loss equivalent to the land area of Ireland each year</strong>. Universal clean cooking alone would abate an estimated 1.5 gigatonnes of CO₂-equivalent annually.</p>
 
       <h3>Cooling: The Adaptation Gap That Fuels the Crisis</h3>
@@ -462,12 +456,6 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
 
       <h3>Electric Cooking: Beyond the Hotplate</h3>
       <p>The electric cooking revolution isn't about conventional resistive hotplates. It's about <strong>efficient appliances</strong> that make electric cooking viable even on modest power supplies.</p>
-
-      <div class="report-chart-box">
-        <div class="report-chart-title">Cooking Technology Efficiency Comparison</div>
-        <canvas id="reportEfficiencyChart" role="img" aria-label="Bar chart: Induction 85%, EPC 75%, Conventional Electric 70%, Gas 40%, Biomass 15%"></canvas>
-        <figcaption>Source: MECS, SEforALL eCooking Practical Guide (2026). EPCs cut cooking energy by 50–70% vs. conventional stoves.</figcaption>
-      </div>
 
       <p><strong>Electric Pressure Cookers (EPCs)</strong> are the standout technology. They cut cooking energy by 50–70% compared to conventional electric stoves by trapping steam and cooking under pressure. A typical EPC draws 700–1,000 watts — manageable on a modest solar home system or mini-grid connection. MECS has published country-specific eCookbooks (e.g., <em>The Kenya eCookbook</em>) to bridge the cultural adoption gap.</p>
 
@@ -837,9 +825,6 @@ function initAllCharts() {
   createInvestmentChart('dashInvestmentChart');
   createElectricityChart('dashElectricityChart');
   createBlackCarbonChart('dashBlackCarbonChart');
-  // Report view charts
-  createDiseaseChart('reportDiseaseChart');
-  createEfficiencyChart('reportEfficiencyChart');
 }
 
 // Initialize when Chart.js is available
