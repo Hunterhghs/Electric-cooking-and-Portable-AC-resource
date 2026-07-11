@@ -421,6 +421,12 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
         <p><strong>Indoor air pollution from biomass cooking kills 2.9 million people every year</strong> — more than HIV/AIDS, malaria, and tuberculosis combined. Indoor PM<sub>2.5</sub> concentrations routinely exceed WHO safe limits by 100×. Children under five account for over 309,000 of these deaths annually.</p>
       </div>
 
+      <div class="report-chart-box">
+        <div class="report-chart-title">Annual Deaths: Household Air Pollution vs. Major Infectious Diseases</div>
+        <canvas id="reportDeathsChart" role="img" aria-label="Bar chart: Household air pollution 2.9M, Tuberculosis 1.3M, HIV/AIDS 0.63M, Malaria 0.62M"></canvas>
+        <figcaption>Source: WHO (2025). Household air pollution kills more people annually than HIV/AIDS, malaria, and tuberculosis combined.</figcaption>
+      </div>
+
       <p>Residential solid-fuel burning produces roughly <strong>a quarter of all global black carbon emissions</strong> — a short-lived climate pollutant with a warming impact 460–1,500× that of CO₂ over a 20-year horizon. Wood and charcoal collection drives <strong>forest loss equivalent to the land area of Ireland each year</strong>. Universal clean cooking alone would abate an estimated 1.5 gigatonnes of CO₂-equivalent annually.</p>
 
       <h3>Cooling: The Adaptation Gap That Fuels the Crisis</h3>
@@ -484,6 +490,12 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
         <div class="mech-card"><div class="mech-num">03</div><h3>Government Subsidies</h3><p>India's PMUY distributed over <strong>100 million free LPG connections</strong> — one of the largest clean cooking transitions in history. The lesson: distribution isn't enough, but electric cooking's near-zero marginal cost (if solar-powered) eliminates the "refill" problem that plagued LPG programs.</p></div>
         <div class="mech-card"><div class="mech-num">04</div><h3>Multilateral & Development Finance</h3><p>The IEA's 2024 Summit pledged <strong>$2.2 billion</strong>. But the World Bank estimates universal clean cooking requires <strong>$150 billion per year</strong> — current funding is an order of magnitude short. The Paris pledge was a down payment, not a solution.</p></div>
         <div class="mech-card"><div class="mech-num">05</div><h3>Product Design for Affordability</h3><p>Efficient DC appliances — running directly from solar panels without AC-DC conversion losses — are transforming off-grid settings. Reducing appliance load by 50% can reduce <strong>total system cost by 30–40%</strong>.</p></div>
+      </div>
+
+      <div class="report-chart-box">
+        <div class="report-chart-title">Clean Cooking Investment: Required vs. Current</div>
+        <canvas id="reportInvestmentChart" role="img" aria-label="Bar chart: Total needed $150B, Public sector share $39B, Private sector share $11B, Currently pledged $2.2B"></canvas>
+        <figcaption>Source: World Bank/ESMAP, IEA Summit on Clean Cooking in Africa (2024). Current funding is two orders of magnitude short of the $150B annual requirement.</figcaption>
       </div>
     </div>
 
@@ -827,6 +839,58 @@ function createBlackCarbonChart(canvasId) {
   });
 }
 
+// ===== CHART: Deaths Comparison (Report) =====
+function createDeathsChart(canvasId) {
+  const ctx = document.getElementById(canvasId);
+  if (!ctx) return;
+  if (allCharts[canvasId]) allCharts[canvasId].destroy();
+  allCharts[canvasId] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Household Air Pollution','Tuberculosis','HIV/AIDS','Malaria'],
+      datasets: [{
+        data: [2.9, 1.3, 0.63, 0.62],
+        backgroundColor: ['#c2410c','#d97706','#dc2626','#f59e0b'],
+        borderRadius: 4, borderSkipped: false,
+      }]
+    },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: true,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.raw + 'M deaths/year' } } },
+      scales: {
+        x: { title: { display: true, text: 'Millions of Deaths per Year' }, ticks: { callback: v => v + 'M' }, grid: { color: gridColor() } },
+        y: { grid: { display: false } }
+      }
+    }
+  });
+}
+
+// ===== CHART: Report Investment Breakdown =====
+function createReportInvestmentChart(canvasId) {
+  const ctx = document.getElementById(canvasId);
+  if (!ctx) return;
+  if (allCharts[canvasId]) allCharts[canvasId].destroy();
+  allCharts[canvasId] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Total Needed','Public Sector','Private Sector','Currently Pledged'],
+      datasets: [{
+        data: [150, 39, 11, 2.2],
+        backgroundColor: ['#c2410c','#d97706','#0d9488','#8c8c8c'],
+        borderRadius: 6,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: true,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => '$' + c.raw + 'B/year' } } },
+      scales: {
+        y: { type: 'logarithmic', title: { display: true, text: 'USD Billions per Year (log scale)' }, ticks: { callback: v => '$'+v+'B' }, grid: { color: gridColor() } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+}
+
 // ===== INIT ALL CHARTS =====
 function initAllCharts() {
   // Dashboard view charts
@@ -837,6 +901,8 @@ function initAllCharts() {
   createEfficiencyChart('reportEfficiencyChart');
   createAcChart('reportAcChart');
   createElectricityChart('reportElectricityChart');
+  createDeathsChart('reportDeathsChart');
+  createReportInvestmentChart('reportInvestmentChart');
 }
 
 // Initialize when Chart.js is available
