@@ -388,27 +388,27 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
     </div>
 
     <div class="dashboard-grid">
-      <div class="dash-chart-card">
+      <div class="dash-chart-card" data-category="cooking">
         <div class="dash-chart-title">Disease Burden from Household Air Pollution</div>
         <canvas id="dashDiseaseChart" role="img" aria-label="Horizontal bar chart: Ischemic heart disease 32%, Stroke 23%, LRI 21%, COPD 19%, Lung cancer 6%"></canvas>
       </div>
-      <div class="dash-chart-card">
+      <div class="dash-chart-card" data-category="cooking">
         <div class="dash-chart-title">Cooking Technology Efficiency</div>
         <canvas id="dashEfficiencyChart" role="img" aria-label="Bar chart: Induction 85%, EPC 75%, Conventional Electric 70%, Gas 40%, Biomass 15%"></canvas>
       </div>
-      <div class="dash-chart-card">
+      <div class="dash-chart-card" data-category="cooling">
         <div class="dash-chart-title">Global AC Stock Projection (2025–2050)</div>
         <canvas id="dashAcChart" role="img" aria-label="Line chart showing AC stock tripling from 2B to 6B units by 2050 under current trajectory vs efficient scenario"></canvas>
       </div>
-      <div class="dash-chart-card">
+      <div class="dash-chart-card" data-category="cooking">
         <div class="dash-chart-title">Clean Cooking Investment Gap</div>
         <canvas id="dashInvestmentChart" role="img" aria-label="Bar chart: $2.2B pledged vs $150B needed annually"></canvas>
       </div>
-      <div class="dash-chart-card">
+      <div class="dash-chart-card" data-category="cooling">
         <div class="dash-chart-title">Global Electricity Access Tiers</div>
         <canvas id="dashElectricityChart" role="img" aria-label="Stacked bar: 655M no access, 1.5B unreliable, 5.8B reliable"></canvas>
       </div>
-      <div class="dash-chart-card">
+      <div class="dash-chart-card" data-category="all">
         <div class="dash-chart-title">Global Black Carbon Sources</div>
         <canvas id="dashBlackCarbonChart" role="img" aria-label="Donut chart: Residential solid fuel 25%, Transport 30%, Industry 28%, Other 17%"></canvas>
       </div>
@@ -618,6 +618,7 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
   const dashTabs = document.querySelectorAll('.dash-tab');
   const kpiRow = document.getElementById('dashKpiRow');
   const kpis = kpiRow ? kpiRow.querySelectorAll('.dash-kpi') : [];
+  const chartCards = document.querySelectorAll('.dash-chart-card[data-category]');
 
   dashTabs.forEach(tab => {
     tab.addEventListener('click', () => {
@@ -625,6 +626,8 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
       tab.classList.add('active');
       tab.setAttribute('aria-selected','true');
       const view = tab.dataset.dash;
+
+      // Filter KPI cards
       kpis.forEach((kpi, i) => {
         const val = kpi.querySelector('.dash-kpi-val');
         if (view === 'all') { val.style.opacity = '1'; }
@@ -632,6 +635,19 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
         else if (view === 'cooling' && (i === 1 || i === 3)) { val.style.opacity = '1'; }
         else { val.style.opacity = '0.3'; }
       });
+
+      // Filter chart cards — show/hide based on category
+      chartCards.forEach(card => {
+        const cat = card.dataset.category;
+        if (view === 'all' || cat === 'all' || cat === view) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // Redraw visible charts after layout change
+      setTimeout(redrawAllCharts, 100);
     });
   });
 })();
