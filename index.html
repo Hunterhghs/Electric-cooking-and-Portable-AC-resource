@@ -91,12 +91,26 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
 .hero-stat-value.clean{color:var(--c-clean)}
 .hero-stat-label{font-size:.75rem;color:var(--c-text2);line-height:1.35}
 .overview-intro{font-size:1.05rem;line-height:1.8;color:var(--c-text2);margin:2rem 0}
-.overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:2rem 0}
+.overview-section{margin-top:2.5rem}
+.overview-section h2{font-size:clamp(1.3rem,2.5vw,1.6rem);margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:2px solid var(--c-border)}
+.overview-section h3{margin-top:1.25rem;margin-bottom:.5rem}
+.overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:1.5rem 0}
 .overview-card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius-md);padding:1.5rem}
 .overview-card.cooking{border-top:3px solid var(--c-cooking)}
 .overview-card.cooling{border-top:3px solid var(--c-cooling)}
 .overview-card h3{margin-top:0}
 .overview-card p{font-size:.9rem;line-height:1.65;color:var(--c-text2)}
+.overview-card p:last-child{margin-bottom:0}
+.overview-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin:1.25rem 0}
+.overview-stat-sm{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius-md);padding:1rem;text-align:center}
+.overview-stat-sm .val{font-family:'Crimson Text',Georgia,serif;font-size:1.25rem;font-weight:700;line-height:1.15}
+.overview-stat-sm .lbl{font-size:.72rem;color:var(--c-text2);line-height:1.3;margin-top:.15rem}
+.overview-cta{display:flex;gap:.75rem;flex-wrap:wrap;margin:1.5rem 0}
+.overview-cta-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.1rem;font-size:.85rem;font-weight:500;border-radius:var(--radius-sm);text-decoration:none;cursor:pointer;transition:all .15s;font-family:inherit;border:1px solid var(--c-border);background:var(--c-surface);color:var(--c-text2)}
+.overview-cta-btn:hover{background:var(--c-border2);color:var(--c-text)}
+.overview-cta-btn.primary{background:var(--c-clean);color:#fff;border-color:var(--c-clean)}
+.overview-cta-btn.primary:hover{opacity:.9}
+.overview-divider{height:1px;background:var(--c-border);margin:2rem 0;border:none}
 .cycle-comparison{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin:1.5rem 0}
 .cycle-box{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius-md);padding:1.25rem}
 .cycle-box.vicious{border-top:3px solid #dc2626}
@@ -216,7 +230,7 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
   <div class="overview-hero">
     <p class="overview-eyebrow">Universal Climate Solutions</p>
     <h1>The Twin Levers: Electric Cooking and Portable Cooling as a Universal Climate Solution</h1>
-    <p class="overview-subtitle">Two billion people cook every meal over wood, charcoal, or dung. Over a billion lack adequate access to cooling in a rapidly warming world. These crises share the same solution architecture — and together they represent one of the highest-leverage climate interventions available.</p>
+    <p class="overview-subtitle">Two billion people cook every meal over wood, charcoal, or dung. Over a billion lack adequate access to cooling in a rapidly warming world. These crises are usually treated as separate problems — one a health and deforestation issue, the other an energy and adaptation challenge. But they share the same solution architecture: efficient, affordable electric appliances, powered by increasingly cheap renewable energy, distributed through networked last-mile models originally built for mobile phones and solar panels.</p>
 
     <div class="hero-stats">
       <div class="hero-stat">
@@ -225,7 +239,7 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
       </div>
       <div class="hero-stat">
         <div class="hero-stat-value clean">2–3 Gt</div>
-        <div class="hero-stat-label">CO₂-equivalent abated annually</div>
+        <div class="hero-stat-label">CO₂-equivalent abated annually — comparable to grounding all aviation and shipping</div>
       </div>
       <div class="hero-stat">
         <div class="hero-stat-value cooling">~25%</div>
@@ -233,32 +247,116 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
       </div>
       <div class="hero-stat">
         <div class="hero-stat-value clean">0.5°C</div>
-        <div class="hero-stat-label">Warming avoided by 2100 via Kigali Amendment</div>
+        <div class="hero-stat-label">Warming avoided by 2100 through refrigerant management alone</div>
       </div>
     </div>
 
-    <p class="overview-intro">Together, universal access to electric cooking and efficient cooling would prevent ~3.5 million premature deaths per year, abate ~2–3 gigatonnes of CO₂-equivalent annually, eliminate ~25% of global black carbon emissions, and avoid up to 0.5°C of warming by 2100. The technologies exist. The financing models have been proven at scale. What's missing is the connective tissue: integrated policy, blended capital, and political will.</p>
-
-    <div class="overview-grid">
-      <div class="overview-card cooking">
-        <h3>The Cooking Crisis</h3>
-        <p><strong>2.1–2.3 billion people</strong> cook with polluting fuels. Indoor air pollution kills 2.9 million annually — more than HIV/AIDS, malaria, and tuberculosis combined. Residential solid-fuel burning produces ~25% of global black carbon. Wood and charcoal collection drives forest loss the size of Ireland each year.</p>
+    <!-- The Overlap -->
+    <div class="overview-section">
+      <h2>The Overlap No One Talks About</h2>
+      <p>For decades, clean cooking and cooling access have lived in separate policy silos. Cooking was a health and gender issue. Cooling was an energy and adaptation challenge. But at ground level, they converge. The same household that cooks with charcoal is the household most exposed to extreme heat. The same solar home system that powers an efficient cookstove can power a fan or a small AC unit. The same PAYG financing platform that sells a smartphone on instalments can finance an electric pressure cooker or a portable air conditioner.</p>
+      <p>Together, universal access to electric cooking and efficient cooling would:</p>
+      <div class="overview-stat-row">
+        <div class="overview-stat-sm"><div class="val" style="color:var(--c-cooking)">2.9M</div><div class="lbl">Deaths/year from household air pollution — more than HIV, malaria, and TB combined</div></div>
+        <div class="overview-stat-sm"><div class="val" style="color:var(--c-cooling)">~500K</div><div class="lbl">Deaths/year from extreme heat, rising 85% among over-65s since the early 2000s</div></div>
+        <div class="overview-stat-sm"><div class="val" style="color:var(--c-clean)">Hundreds</div><div class="lbl">Of hours per year saved in fuel collection — time overwhelmingly borne by women and girls</div></div>
       </div>
-      <div class="overview-card cooling">
-        <h3>The Cooling Gap</h3>
-        <p><strong>1.12 billion people</strong> at high risk from lack of cooling access. Heat kills ~489,000 annually. AC saves an estimated 190,000 lives per year — but cooling already accounts for 7% of global emissions, and the AC stock is projected to triple by 2050.</p>
+      <p>The technologies exist. The financing models have been proven at scale. What's missing is the connective tissue: the integrated policy, the blended capital, and the political will to treat this as the climate emergency it is.</p>
+    </div>
+
+    <!-- The Cooking Crisis -->
+    <div class="overview-section">
+      <h2>The Cooking Crisis: A Slow-Motion Catastrophe</h2>
+      <p><strong>2.1 to 2.3 billion people</strong> — roughly a quarter of humanity — still cook every meal over wood, charcoal, coal, kerosene, or dung. In sub-Saharan Africa, the absolute number without clean cooking access continues to rise, despite gains in access rates, because population growth simply outpaces deployment.</p>
+
+      <div class="callout cooking">
+        <p><strong>Indoor air pollution from biomass cooking kills 2.9 million people every year.</strong> That's more than HIV/AIDS, malaria, and tuberculosis combined. Indoor PM<sub>2.5</sub> concentrations routinely exceed WHO safe limits by 100 times. Children under five account for over 309,000 of these deaths annually.</p>
+      </div>
+
+      <p>The disease burden breaks down with brutal clarity. Ischemic heart disease accounts for 32% of cooking-related deaths, stroke 23%, lower respiratory infections 21%, chronic obstructive pulmonary disease 19%, and lung cancer 6%. These are not abstract statistics — they represent millions of families losing parents, breadwinners, and children to conditions that are entirely preventable with existing technology.</p>
+
+      <p>The climate impact is equally stark. Residential solid-fuel burning produces roughly <strong>a quarter of all global black carbon emissions</strong> — a short-lived climate pollutant with a warming impact 460 to 1,500 times that of CO₂ over a 20-year horizon. Wood and charcoal collection drives <strong>forest loss equivalent to the land area of Ireland each year</strong>. Universal clean cooking alone would abate an estimated <strong>1.5 gigatonnes of CO₂-equivalent annually</strong>.</p>
+
+      <div class="overview-stat-row">
+        <div class="overview-stat-sm"><div class="val" style="color:var(--c-cooking)">460–1,500×</div><div class="lbl">Black carbon warming impact vs. CO₂ over 20 years</div></div>
+        <div class="overview-stat-sm"><div class="val" style="color:var(--c-cooking)">1.5 Gt</div><div class="lbl">CO₂-eq abated annually with universal clean cooking</div></div>
+        <div class="overview-stat-sm"><div class="val" style="color:var(--c-cooking)">1 Ireland/yr</div><div class="lbl">Forest area lost annually to fuelwood and charcoal collection</div></div>
       </div>
     </div>
 
-    <div class="cycle-comparison">
-      <div class="cycle-box vicious">
-        <h4>🔴 Vicious Cycle (Current)</h4>
-        <p>Rising temperatures → more AC demand → more electricity consumption (mostly fossil) → more HFC leakage → more warming → more AC demand</p>
+    <!-- The Cooling Gap -->
+    <div class="overview-section">
+      <h2>The Cooling Gap: Adaptation That Fuels the Crisis</h2>
+      <p><strong>1.12 billion people</strong> are at high risk from lack of cooling access — spanning thermal comfort, food cold chains, and vaccine storage. Heat already kills roughly <strong>489,000 people annually</strong>, and heat-related mortality among people over 65 has risen approximately 85% since the early 2000s. Without adaptation, heat deaths are projected to reach 255,000 per year by 2050.</p>
+
+      <div class="callout cooling">
+        <p><strong>The cruel irony at the heart of the cooling crisis:</strong> air conditioning saves lives — an estimated 190,000 heat-related deaths are averted annually because of it — but the way we deploy AC today is accelerating the warming that makes it necessary. Cooling already accounts for over 7% of global greenhouse gas emissions, and the stock of air conditioners is projected to triple by 2050.</p>
       </div>
-      <div class="cycle-box virtuous">
-        <h4>🟢 Virtuous Cycle (Possible)</h4>
-        <p>Efficient electric cooking + cooling → reduced biomass burning + lower refrigerant emissions → cleaner air + less warming → lower cooling demand → affordable renewables power both</p>
+
+      <p>Ten AC units will be sold every second for the next thirty years. The average unit sold today operates at less than half the efficiency of what's already on the shelf and one-third the efficiency of the best available technology. Meanwhile, HFC refrigerants — the working fluids in most ACs and heat pumps — are growing at 8% annually and could represent 7–19% of global CO₂ emissions by 2050 without intervention. Some common HFCs have global warming potentials of <strong>12,000 to 14,000 times that of CO₂</strong>.</p>
+
+      <div class="overview-stat-row">
+        <div class="overview-stat-sm"><div class="val" style="color:var(--c-cooling)">3×</div><div class="lbl">AC stock projected to triple by 2050</div></div>
+        <div class="overview-stat-sm"><div class="val" style="color:var(--c-cooling)">10/sec</div><div class="lbl">AC units sold every second for the next 30 years</div></div>
+        <div class="overview-stat-sm"><div class="val" style="color:var(--c-cooling)">7–19%</div><div class="lbl">Of global CO₂ from HFCs by 2050 without intervention</div></div>
       </div>
+    </div>
+
+    <!-- The Cycle -->
+    <div class="overview-section">
+      <h2>Breaking the Cycle</h2>
+      <p>The relationship between cooking, cooling, and climate is not linear — it's a feedback loop. Understanding which direction it spins is the key to understanding why this matters.</p>
+
+      <div class="cycle-comparison">
+        <div class="cycle-box vicious">
+          <h4>🔴 The Vicious Cycle (Current Trajectory)</h4>
+          <p>Rising temperatures → more AC demand → more electricity consumption (mostly fossil-fueled in developing markets) → more HFC leakage from poorly maintained units → more warming → even more AC demand. Meanwhile, biomass cooking continues to pump black carbon into the atmosphere, accelerating near-term warming and driving deforestation that removes a critical carbon sink.</p>
+        </div>
+        <div class="cycle-box virtuous">
+          <h4>🟢 The Virtuous Cycle (What's Possible)</h4>
+          <p>Efficient electric cooking replaces biomass → black carbon emissions plummet → cleaner air, fewer deaths. Efficient cooling powered by renewables replaces inefficient fossil-dependent AC → lower refrigerant emissions → less warming → lower cooling demand overall. Affordable solar powers both. Households save money, time, and lives. The cycle reinforces itself in the right direction.</p>
+        </div>
+      </div>
+
+      <p>Breaking the vicious cycle and locking in the virtuous one is the central task. And it's achievable with technologies that exist today, financed through models that are already working at scale.</p>
+    </div>
+
+    <!-- The Solution -->
+    <div class="overview-section">
+      <h2>The Solution Architecture</h2>
+      <p>Solving the twin crises of dirty cooking and inadequate cooling doesn't require a scientific breakthrough. It requires coordinated deployment across three dimensions:</p>
+
+      <div class="overview-grid">
+        <div class="overview-card clean">
+          <h3>1. Efficient Appliances</h3>
+          <p>Electric pressure cookers cut cooking energy by 50–70%. Induction cooktops reach ~85% efficiency. Mini-split inverter ACs achieve 2–3× the efficiency of typical window units. DC-powered appliances run directly from solar panels without conversion losses. These are not prototypes — they're on the shelf today, with prices falling fast.</p>
+        </div>
+        <div class="overview-card clean">
+          <h3>2. Smart Financing</h3>
+          <p>Pay-As-You-Go (PAYG) models pioneered in East Africa let households pay for appliances in daily micropayments via mobile money. M-KOPA has scaled this to over 3 million customers. Carbon finance can cross-subsidize prices by 30–60%. Blended capital from development banks fills the gap between commercial viability and universal access.</p>
+        </div>
+        <div class="overview-card clean">
+          <h3>3. Integrated Policy</h3>
+          <p>Minimum energy performance standards eliminate the worst appliances from the market. Appliance financing bundled with electrification programs converts energy access into energy use. Passive cooling — cool roofs, urban tree canopy, natural ventilation — reduces the need for mechanical cooling before a single AC is installed. The WHO's simple recommendation of 27°C thermostat + fan can cut cooling electricity use by up to 70%.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- What's at Stake -->
+    <div class="overview-section">
+      <h2>What's at Stake</h2>
+      <p>The World Bank estimates that universal modern energy cooking services require <strong>$150 billion per year</strong> in total investment. Current commitments are an order of magnitude short — the $2.2 billion pledged at the IEA's 2024 Paris Summit was a down payment, not a solution. But $150 billion is small in the context of global energy investment (~$2.8 trillion annually) and tiny compared to the <strong>~$2.4 trillion per year</strong> in economic costs from household air pollution alone.</p>
+
+      <p>This is not an aid problem. It's an investment opportunity — one that pays for itself many times over in lives saved, emissions avoided, healthcare costs reduced, and productive hours reclaimed. The path from 2 billion people cooking with wood and 1 billion without adequate cooling to universal access is not a mystery. It's a supply chain and a financing problem with known solutions. The question is whether we deploy those solutions at the speed and scale the crisis demands.</p>
+    </div>
+
+    <!-- Explore Further -->
+    <hr class="overview-divider">
+    <p style="font-family:'Crimson Text',Georgia,serif;font-size:1.15rem;font-weight:600;margin-bottom:.75rem">Explore Further</p>
+    <div class="overview-cta">
+      <button class="overview-cta-btn primary" onclick="document.querySelector('.nav-tab[data-view=dashboard]').click()">📊 Interactive Dashboard →</button>
+      <button class="overview-cta-btn" onclick="document.querySelector('.nav-tab[data-view=report]').click()">📄 Read the Full Digital Report →</button>
+      <button class="overview-cta-btn" onclick="document.querySelector('.nav-tab[data-view=informational]').click()">ℹ️ About This Resource →</button>
     </div>
   </div>
 </section>
