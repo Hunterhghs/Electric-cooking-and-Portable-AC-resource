@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Twin Levers: Electric Cooking & Portable Cooling as Universal Climate Solutions — H Heuristics</title>
+<meta name="description" content="How universal access to electric cooking and efficient portable cooling can prevent 3.5 million deaths, abate 2–3 Gt CO₂ annually, and transform the climate fight.">
+<meta name="author" content="H Heuristics">
+<link rel="canonical" href="https://www.hheuristics.com/electric-cooking-portable-ac">
+<meta property="og:title" content="The Twin Levers: Electric Cooking & Portable Cooling">
+<meta property="og:description" content="How universal access to electric cooking and efficient cooling can prevent 3.5M deaths and abate 2–3 Gt CO₂ annually.">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+/* ===== RESET & BASE ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:1rem;line-height:1.75;color:#1a1a1a;background:#fbfbf9;overflow-x:hidden}
+
+/* ===== DESIGN TOKENS ===== */
+:root{
+  --c-accent-cooking:#c2410c;--c-accent-cooking-light:#fff7ed;
+  --c-accent-cooling:#0369a1;--c-accent-cooling-light:#f0f9ff;
+  --c-accent-clean:#0d9488;--c-accent-clean-light:#f0fdfa;
+  --c-text:#1a1a1a;--c-text-secondary:#5c5c5c;--c-text-muted:#8c8c8c;
+  --c-bg:#fbfbf9;--c-surface:#ffffff;--c-border:#e5e5e0;--c-border-light:#f0f0eb;
+  --c-dashboard-bg:#f5f5f0;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.04);--shadow-md:0 4px 12px rgba(0,0,0,.06);--shadow-lg:0 12px 40px rgba(0,0,0,.08);
+  --radius-sm:4px;--radius-md:8px;--radius-lg:12px;
+  --content-max:720px;--dashboard-w:380px;--nav-h:64px;
+}
+.dark{
+  --c-text:#e8e8e4;--c-text-secondary:#a8a8a4;--c-text-muted:#787874;
+  --c-bg:#141412;--c-surface:#1c1c1a;--c-border:#2c2c28;--c-border-light:#242420;
+  --c-dashboard-bg:#1a1a18;
+  --c-accent-cooking-light:#2a1a10;--c-accent-cooling-light:#0a1a2a;--c-accent-clean-light:#0a1a18;
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1,h2,h3,h4{font-family:'Crimson Text',Georgia,'Times New Roman',serif;font-weight:600;line-height:1.25;text-wrap:balance;color:var(--c-text)}
+h1{font-size:clamp(2rem,5vw,3rem);letter-spacing:-0.02em}
+h2{font-size:clamp(1.5rem,3.5vw,2rem);margin-top:3rem;margin-bottom:1rem;letter-spacing:-0.01em}
+h3{font-size:clamp(1.15rem,2.5vw,1.35rem);margin-top:2rem;margin-bottom:.75rem}
+h4{font-size:1.05rem;font-family:'Inter',system-ui,sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--c-text-secondary);margin-top:1.5rem;margin-bottom:.5rem}
+p{margin-bottom:1.25rem}
+a{color:var(--c-accent-cooling);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;transition:color .15s}
+a:hover{color:var(--c-accent-clean)}
+strong{font-weight:600}
+.serif{font-family:'Crimson Text',Georgia,serif}
+.mono{font-family:'JetBrains Mono','SF Mono',monospace;font-variant-numeric:tabular-nums}
+.num{font-variant-numeric:tabular-nums;letter-spacing:-0.01em}
+.text-balance{text-wrap:balance}
+
+/* ===== LAYOUT ===== */
+.site-wrapper{display:flex;min-height:100vh}
+.content-col{flex:1;min-width:0;padding-bottom:4rem}
+
+/* ===== NAVIGATION ===== */
+.site-nav{position:sticky;top:0;z-index:50;height:var(--nav-h);background:rgba(251,251,249,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--c-border);display:flex;align-items:center;justify-content:space-between;padding:0 2rem}
+.dark .site-nav{background:rgba(20,20,18,.92)}
+.nav-brand{display:flex;align-items:center;gap:.5rem;font-family:'Crimson Text',Georgia,serif;font-size:1.1rem;font-weight:700;color:var(--c-text);text-decoration:none}
+.nav-brand:hover{color:var(--c-accent-clean)}
+.nav-brand-dot{width:8px;height:8px;border-radius:50%;background:var(--c-accent-clean)}
+.nav-links{display:flex;align-items:center;gap:1.5rem;list-style:none}
+.nav-links a{font-size:.85rem;font-weight:500;color:var(--c-text-secondary);text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:var(--c-text)}
+.theme-toggle{background:none;border:1px solid var(--c-border);border-radius:var(--radius-sm);padding:6px 10px;cursor:pointer;font-size:.85rem;color:var(--c-text-secondary);display:flex;align-items:center;gap:4px;transition:all .15s}
+.theme-toggle:hover{background:var(--c-border-light);color:var(--c-text)}
+
+/* ===== HERO ===== */
+.hero{padding:4rem 2rem 3rem;max-width:var(--content-max);margin:0 auto}
+.hero-eyebrow{font-family:'Inter',system-ui,sans-serif;font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--c-accent-clean);margin-bottom:1rem}
+.hero h1{margin-bottom:1.25rem}
+.hero-subtitle{font-size:1.15rem;line-height:1.7;color:var(--c-text-secondary);margin-bottom:2rem;max-width:620px}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.5rem}
+.hero-stat{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius-md);padding:1.25rem;text-align:center}
+.hero-stat-value{font-family:'Crimson Text',Georgia,serif;font-size:1.75rem;font-weight:700;line-height:1.1;margin-bottom:.25rem}
+.hero-stat-value.cooking{color:var(--c-accent-cooking)}
+.hero-stat-value.cooling{color:var(--c-accent-cooling)}
+.hero-stat-value.clean{color:var(--c-accent-clean)}
+.hero-stat-label{font-size:.78rem;color:var(--c-text-secondary);line-height:1.4}
+.hero-stat-suffix{font-size:.85rem;font-weight:400;color:var(--c-text-muted)}
+
+/* ===== CONTENT SECTIONS ===== */
+.content-section{padding:0 2rem;max-width:var(--content-max);margin:0 auto}
+.content-section + .content-section{margin-top:1rem}
+.section-intro{font-size:1.1rem;line-height:1.8;color:var(--c-text-secondary)}
+.lead-in{font-size:1.2rem;line-height:1.8;color:var(--c-text);font-weight:500;font-family:'Crimson Text',Georgia,serif}
+
+/* ===== CALLOUT BOX ===== */
+.callout{background:var(--c-surface);border:1px solid var(--c-border);border-left:3px solid var(--c-accent-clean);border-radius:0 var(--radius-md) var(--radius-md) 0;padding:1.25rem 1.5rem;margin:1.5rem 0}
+.callout.cooking{border-left-color:var(--c-accent-cooking);background:var(--c-accent-cooking-light)}
+.callout.cooling{border-left-color:var(--c-accent-cooling);background:var(--c-accent-cooling-light)}
+.callout.clean{border-left-color:var(--c-accent-clean);background:var(--c-accent-clean-light)}
+.callout p{margin-bottom:.5rem}
+.callout p:last-child{margin-bottom:0}
+
+/* ===== STAT GRID ===== */
+.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:1.5rem 0}
+.stat-card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius-md);padding:1.25rem}
+.stat-card-value{font-family:'Crimson Text',Georgia,serif;font-size:1.5rem;font-weight:700;line-height:1.2;margin-bottom:.25rem}
+.stat-card-label{font-size:.8rem;color:var(--c-text-secondary);line-height:1.4}
+
+/* ===== CHART CONTAINER ===== */
+.chart-box{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius-md);padding:1.5rem;margin:1.5rem 0}
+.chart-box-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.chart-box-title{font-family:'Inter',system-ui,sans-serif;font-size:.85rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--c-text-secondary)}
+.chart-box canvas{max-height:320px}
+.chart-box figcaption{font-size:.78rem;color:var(--c-text-muted);margin-top:.75rem;text-align:center}
+
+/* ===== DISEASE BREAKDOWN TABLE ===== */
+.disease-list{list-style:none;margin:1rem 0}
+.disease-list li{display:flex;align-items:center;gap:.75rem;padding:.65rem 0;border-bottom:1px solid var(--c-border-light)}
+.disease-list li:last-child{border-bottom:none}
+.disease-bar{height:8px;border-radius:4px;flex:1;min-width:0}
+.disease-pct{font-family:'JetBrains Mono',monospace;font-size:.85rem;font-weight:500;min-width:3.5rem;text-align:right}
+.disease-label{font-size:.9rem;min-width:11rem}
+
+/* ===== MECHANISM CARDS ===== */
+.mechanism-grid{display:grid;grid-template-columns:1fr;gap:1.25rem;margin:1.5rem 0}
+.mechanism-card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius-md);padding:1.5rem}
+.mechanism-number{font-family:'Crimson Text',Georgia,serif;font-size:2rem;font-weight:700;color:var(--c-accent-clean);line-height:1;margin-bottom:.5rem;opacity:.4}
+.mechanism-card h3{margin-top:.25rem;margin-bottom:.5rem}
+.mechanism-card p{font-size:.9rem;line-height:1.65;color:var(--c-text-secondary);margin-bottom:.5rem}
+
+/* ===== POLICY LIST ===== */
+.policy-list{counter-reset:policy;list-style:none;margin:1.5rem 0}
+.policy-list li{counter-increment:policy;display:flex;gap:1rem;padding:1.25rem 0;border-bottom:1px solid var(--c-border-light)}
+.policy-list li:last-child{border-bottom:none}
+.policy-num{font-family:'Crimson Text',Georgia,serif;font-size:1.75rem;font-weight:700;color:var(--c-accent-clean);line-height:1;min-width:2.5rem;opacity:.5}
+.policy-content h4{margin-top:0;margin-bottom:.25rem;font-family:'Crimson Text',Georgia,serif;text-transform:none;letter-spacing:0;font-size:1.1rem;color:var(--c-text)}
+.policy-content p{font-size:.9rem;line-height:1.65;color:var(--c-text-secondary);margin-bottom:.25rem}
+.policy-who{font-size:.8rem;color:var(--c-text-muted);font-style:italic}
+
+/* ===== TABLE ===== */
+.data-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.9rem}
+.data-table th{text-align:left;font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:var(--c-text-secondary);padding:.75rem .5rem;border-bottom:2px solid var(--c-border)}
+.data-table td{padding:.75rem .5rem;border-bottom:1px solid var(--c-border-light);vertical-align:top}
+.data-table tr:last-child td{border-bottom:none}
+.data-table .highlight{font-weight:600;color:var(--c-accent-clean)}
+
+/* ===== VICIOUS-VIRTUOUS CYCLE ===== */
+.cycle-comparison{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:1.5rem 0}
+.cycle-box{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius-md);padding:1.5rem}
+.cycle-box.vicious{border-top:3px solid #dc2626}
+.cycle-box.virtuous{border-top:3px solid var(--c-accent-clean)}
+.cycle-box h4{font-family:'Crimson Text',Georgia,serif;text-transform:none;letter-spacing:0;font-size:1.1rem;margin-top:0;margin-bottom:.75rem}
+.cycle-box p{font-size:.88rem;line-height:1.6;color:var(--c-text-secondary);margin-bottom:0}
+
+/* ===== CONCLUSION ===== */
+.conclusion-box{background:linear-gradient(135deg,var(--c-accent-clean-light),var(--c-accent-cooling-light));border:1px solid var(--c-border);border-radius:var(--radius-lg);padding:2rem;margin:2rem 0}
+.conclusion-box h2{margin-top:0}
+.conclusion-box p{font-size:1.05rem;line-height:1.75}
+
+/* ===== FOOTER ===== */
+.site-footer{max-width:var(--content-max);margin:0 auto;padding:3rem 2rem 2rem;border-top:1px solid var(--c-border);font-size:.82rem;color:var(--c-text-muted);line-height:1.6}
+.site-footer h4{font-family:'Inter',system-ui,sans-serif;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--c-text-secondary);margin-bottom:.5rem}
+.site-footer a{color:var(--c-text-muted)}
+.site-footer-brand{font-family:'Crimson Text',Georgia,serif;font-size:1.1rem;font-weight:700;color:var(--c-text);margin-bottom:.5rem}
+
+/* ===== DASHBOARD ===== */
+.dashboard-col{width:var(--dashboard-w);flex-shrink:0;position:relative}
+.dashboard-fixed{position:fixed;top:var(--nav-h);right:0;width:var(--dashboard-w);height:calc(100vh - var(--nav-h));overflow-y:auto;overflow-x:hidden;background:var(--c-dashboard-bg);border-left:1px solid var(--c-border);padding:1.5rem;z-index:10}
+.dashboard-fixed::-webkit-scrollbar{width:4px}
+.dashboard-fixed::-webkit-scrollbar-thumb{background:var(--c-border);border-radius:2px}
+.dashboard-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem}
+.dashboard-title{font-family:'Inter',system-ui,sans-serif;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--c-text-secondary)}
+.dashboard-toggle{background:none;border:none;cursor:pointer;font-size:.75rem;color:var(--c-text-muted);padding:2px 6px;display:none}
+.dashboard-kpis{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin-bottom:1.25rem}
+.dashboard-kpi{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius-sm);padding:.75rem}
+.dashboard-kpi-value{font-family:'Crimson Text',Georgia,serif;font-size:1.2rem;font-weight:700;line-height:1.1;margin-bottom:.15rem}
+.dashboard-kpi-label{font-size:.68rem;color:var(--c-text-secondary);line-height:1.3}
+.dashboard-chart{margin-bottom:1.25rem}
+.dashboard-chart-title{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--c-text-secondary);margin-bottom:.5rem}
+.dashboard-chart canvas{max-height:180px}
+.dashboard-tabs{display:flex;gap:.35rem;margin-bottom:1rem}
+.dashboard-tab{flex:1;text-align:center;padding:.4rem .5rem;font-size:.72rem;font-weight:500;border:1px solid var(--c-border);border-radius:var(--radius-sm);background:var(--c-surface);color:var(--c-text-secondary);cursor:pointer;transition:all .15s}
+.dashboard-tab:hover{background:var(--c-border-light)}
+.dashboard-tab.active{background:var(--c-accent-clean);color:#fff;border-color:var(--c-accent-clean)}
+
+/* Mobile dashboard button */
+.dashboard-mobile-btn{display:none;position:fixed;bottom:1.5rem;right:1.5rem;z-index:60;width:48px;height:48px;border-radius:50%;background:var(--c-accent-clean);color:#fff;border:none;box-shadow:var(--shadow-lg);cursor:pointer;font-size:1.2rem;align-items:center;justify-content:center}
+.dashboard-mobile-overlay{display:none;position:fixed;inset:0;z-index:55;background:rgba(0,0,0,.3)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1280px){
+  .dashboard-col{display:none}
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:1024px){
+  .dashboard-mobile-btn{display:flex}
+  .dashboard-mobile-overlay.active{display:block}
+  .dashboard-col.mobile-open{display:block;position:fixed;top:var(--nav-h);right:0;z-index:56;width:min(var(--dashboard-w),100vw);height:calc(100vh - var(--nav-h));overflow-y:auto;background:var(--c-dashboard-bg);border-left:1px solid var(--c-border);padding:1.5rem;box-shadow:var(--shadow-lg)}
+}
+@media(max-width:768px){
+  .hero{padding:2.5rem 1.25rem 2rem}
+  .content-section{padding:0 1.25rem}
+  .hero-stats{grid-template-columns:1fr 1fr;gap:.65rem}
+  .hero-stat{padding:1rem}
+  .hero-stat-value{font-size:1.35rem}
+  .stat-grid{grid-template-columns:1fr}
+  .cycle-comparison{grid-template-columns:1fr}
+  .mechanism-grid{grid-template-columns:1fr}
+  .data-table{font-size:.78rem}
+  .data-table th,.data-table td{padding:.5rem .35rem}
+  .site-nav{padding:0 1rem}
+  .nav-links{gap:.75rem}
+  .nav-links a{font-size:.78rem}
+  h2{font-size:1.35rem}
+}
+@media(max-width:480px){
+  .hero-stats{grid-template-columns:1fr}
+  .nav-links .optional-nav{display:none}
+  .conclusion-box{padding:1.25rem}
+  .policy-list li{flex-direction:column;gap:.5rem}
+}
+</style>
+</head>
+<body>
+<div class="site-wrapper">
+  <div class="content-col">
+    <!-- NAVIGATION -->
+    <nav class="site-nav" role="navigation" aria-label="Main navigation">
+      <a href="#" class="nav-brand"><span class="nav-brand-dot"></span>H Heuristics</a>
+      <ul class="nav-links">
+        <li><a href="#problem">The Problem</a></li>
+        <li><a href="#technologies">Technologies</a></li>
+        <li><a href="#distribution">Distribution</a></li>
+        <li><a href="#policy">Policy</a></li>
+        <li class="optional-nav"><a href="#conclusion">Conclusion</a></li>
+        <li><button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">☀️</button></li>
+      </ul>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero">
+      <p class="hero-eyebrow">Universal Climate Solutions</p>
+      <h1>The Twin Levers: Electric Cooking and Portable Cooling as a Universal Climate Solution</h1>
+      <p class="hero-subtitle">Two billion people cook every meal over wood, charcoal, or dung. Over a billion lack adequate access to cooling. These crises share the same solution architecture — and together they represent one of the highest-leverage climate interventions available.</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-value cooking">~3.5M</div>
+          <div class="hero-stat-label">Premature deaths prevented per year</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value clean">2–3 Gt</div>
+          <div class="hero-stat-label">CO₂-equivalent abated annually</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value cooling">~25%</div>
+          <div class="hero-stat-label">Of global black carbon emissions eliminated</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value clean">0.5°C</div>
+          <div class="hero-stat-label">Warming avoided by 2100 <span class="hero-stat-suffix">(Kigali Amendment)</span></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- PROBLEM SECTION -->
+    <section class="content-section" id="problem">
+      <h2>Part 1: The Scale of the Problem</h2>
+      <p class="section-intro">These crises are usually treated as separate problems — one a health and deforestation issue, the other an energy and adaptation challenge. But they share the same solution architecture: efficient, affordable electric appliances, powered by increasingly cheap renewable energy, distributed through networked last-mile models.</p>
+
+      <h3>Cooking: The Slow-Motion Catastrophe</h3>
+      <p><strong>2.1–2.3 billion people</strong> still cook with polluting fuels — wood, charcoal, coal, kerosene, and dung. In sub-Saharan Africa, the absolute number without clean cooking access continues to rise, despite gains, because population growth outpaces deployment.</p>
+
+      <div class="callout cooking">
+        <p><strong>Indoor air pollution from biomass cooking kills 2.9 million people every year</strong> — more than HIV/AIDS, malaria, and tuberculosis combined. Indoor PM<sub>2.5</sub> concentrations routinely exceed WHO safe limits by 100 times.</p>
+      </div>
+
+      <div class="chart-box">
+        <div class="chart-box-header"><span class="chart-box-title">Disease Burden from Household Air Pollution</span></div>
+        <canvas id="diseaseBurdenChart" role="img" aria-label="Disease burden breakdown: Ischemic heart disease 32%, Stroke 23%, Lower respiratory infections 21%, COPD 19%, Lung cancer 6%"></canvas>
+        <figcaption>Source: WHO Household Air Pollution Fact Sheet (2025). Children under five account for over 309,000 deaths annually.</figcaption>
+      </div>
+
+      <p>Residential solid-fuel burning produces roughly <strong>a quarter of all global black carbon emissions</strong> — a short-lived climate pollutant with a warming impact 460–1,500× that of CO₂ over a 20-year horizon. Wood and charcoal collection drives <strong>forest loss equivalent to the land area of Ireland each year</strong>. Universal clean cooking alone would abate an estimated 1.5 gigatonnes of CO₂-equivalent annually.</p>
+
+      <h3>Cooling: The Adaptation Gap That Fuels the Crisis</h3>
+      <p><strong>1.12 billion people</strong> are at high risk from lack of cooling access — spanning thermal comfort, food cold chains, and vaccine storage. Heat already kills roughly 489,000 people annually, and heat-related mortality among people over 65 has risen approximately 85% since the early 2000s.</p>
+
+      <div class="callout cooling">
+        <p><strong>The cruel irony:</strong> air conditioning saves an estimated 190,000 lives annually — but the way we deploy AC today is accelerating the warming that makes it necessary. Cooling already accounts for over 7% of global greenhouse gas emissions.</p>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-card-value" style="color:var(--c-accent-cooling)">3×</div>
+          <div class="stat-card-label">AC stock projected to triple by 2050</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-value" style="color:var(--c-accent-cooling)">10/sec</div>
+          <div class="stat-card-label">AC units sold every second for the next 30 years</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-value" style="color:var(--c-accent-cooking)">7–19%</div>
+          <div class="stat-card-label">Of global CO₂ emissions from HFCs by 2050 without intervention</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-value" style="color:var(--c-accent-cooking)">12,000×</div>
+          <div class="stat-card-label">GWP of some common HFCs vs. CO₂</div>
+        </div>
+      </div>
+
+      <h3>The Vicious-Virtuous Cycle</h3>
+      <div class="cycle-comparison">
+        <div class="cycle-box vicious">
+          <h4>🔴 Vicious Cycle (Current)</h4>
+          <p>Rising temperatures → more AC demand → more electricity consumption (mostly fossil) → more HFC leakage → more warming → more AC demand</p>
+        </div>
+        <div class="cycle-box virtuous">
+          <h4>🟢 Virtuous Cycle (Possible)</h4>
+          <p>Efficient electric cooking + cooling → reduced biomass burning + lower refrigerant emissions → cleaner air + less warming → lower cooling demand → affordable renewables power both</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECHNOLOGIES SECTION -->
+    <section class="content-section" id="technologies">
+      <h2>Part 2: The Technologies — What Works Now</h2>
+
+      <h3>Electric Cooking: Beyond the Hotplate</h3>
+      <p>The electric cooking revolution isn't about conventional resistive hotplates. It's about <strong>efficient appliances</strong> that make electric cooking viable even on modest power supplies.</p>
+
+      <div class="chart-box">
+        <div class="chart-box-header"><span class="chart-box-title">Cooking Technology Efficiency Comparison</span></div>
+        <canvas id="cookingEfficiencyChart" role="img" aria-label="Bar chart comparing cooking technology efficiency: Induction 85%, Electric Pressure Cooker 75%, Conventional Electric 70%, Gas 40%, Biomass 15%"></canvas>
+        <figcaption>Source: MECS, SEforALL eCooking Practical Guide (2026). EPCs cut cooking energy by 50–70% vs. conventional stoves.</figcaption>
+      </div>
+
+      <p><strong>Electric Pressure Cookers (EPCs)</strong> are the standout technology. They cut cooking energy by 50–70% compared to conventional electric stoves by trapping steam and cooking under pressure. A typical EPC draws 700–1,000 watts — manageable on a modest solar home system or mini-grid connection.</p>
+
+      <p><strong>Induction cooktops</strong> offer ~85% energy efficiency (vs. ~40% for gas). Prices for single-burner induction units have fallen below $30 in many markets. <strong>Rice cookers and multicookers</strong> (300–500W) are already ubiquitous across Asia and make natural entry points for electric cooking transitions.</p>
+
+      <div class="callout clean">
+        <p><strong>Key insight:</strong> Fuel stacking is normal and should be designed for, not fought. Households rarely switch overnight — they add electric cooking for some meals while keeping biomass for others. The transition is gradual.</p>
+      </div>
+
+      <h3>Portable & Efficient Cooling: The Full Toolkit</h3>
+      <p>Mini-split inverter-driven heat pumps achieve SEER ratings of 20–30+, versus 8–13 for typical window units. The IEA's Efficient Cooling Scenario shows that <strong>doubling average AC efficiency, combined with clean power, could halve cooling emissions</strong> even as access expands dramatically.</p>
+
+      <p>The WHO recommends a hybrid approach: set AC thermostats to 27°C (81°F) with an electric fan, which <strong>makes the room feel 4°C cooler and can save up to 70% on cooling electricity</strong>. Passive strategies — cool roofs, reflective materials, urban tree canopy, natural ventilation — reduce or eliminate the need for mechanical cooling in the first place.</p>
+
+      <div class="chart-box">
+        <div class="chart-box-header"><span class="chart-box-title">Projected Global AC Stock Growth (2025–2050)</span></div>
+        <canvas id="acGrowthChart" role="img" aria-label="Line chart showing AC stock tripling from approximately 2 billion units in 2025 to 6 billion by 2050"></canvas>
+        <figcaption>Source: IEA The Future of Cooling (2018). Current trajectory vs. Efficient Cooling Scenario.</figcaption>
+      </div>
+
+      <p><strong>Portable AC as a transitional tool:</strong> While less efficient than mini-splits, portable and window units fill a critical gap. For the urban poor living in informal settlements with metal roofs and no insulation — the populations most exposed to extreme heat — a portable unit may be the only viable cooling option in the near term.</p>
+    </section>
+
+    <!-- DISTRIBUTION SECTION -->
+    <section class="content-section" id="distribution">
+      <h2>Part 3: Making It Available to Everyone — The Distribution Architecture</h2>
+      <p class="section-intro">The core challenge isn't technological. It's the last mile: getting efficient appliances into the hands of the people who need them most, at prices they can afford, with the power to run them and the support to keep them working.</p>
+
+      <div class="mechanism-grid">
+        <div class="mechanism-card">
+          <div class="mechanism-number">01</div>
+          <h3>Pay-As-You-Go (PAYG) — The Mobile Money Revolution</h3>
+          <p>The single most important distribution innovation of the past decade. A customer pays a small deposit (~$10–30), then makes daily micropayments via mobile money. M-KOPA has scaled this to <strong>over 3 million customers</strong>, expanding from solar into smartphones, TVs, refrigerators, and electric cooking appliances.</p>
+          <p style="color:var(--c-text)"><strong>Why it works:</strong> Converts prohibitive upfront costs ($50–500) into manageable daily payments ($0.30–1.00/day). Leverages existing mobile money — Kenya's M-Pesa reaches ~90% of adults.</p>
+        </div>
+
+        <div class="mechanism-card">
+          <div class="mechanism-number">02</div>
+          <h3>Carbon Finance — Making Pollution Prevention Pay</h3>
+          <p>Clean cooking is already one of the largest segments of the voluntary carbon market. Companies like Burn Manufacturing use carbon revenue to <strong>cross-subsidize stove prices by 30–60%</strong>. At $10–20/tonne, universal clean cooking's 1.5 Gt annual abatement could generate $15–30 billion per year in carbon revenue.</p>
+        </div>
+
+        <div class="mechanism-card">
+          <div class="mechanism-number">03</div>
+          <h3>Government Subsidies — What Works</h3>
+          <p>India's PMUY distributed over <strong>100 million free LPG connections</strong> to below-poverty-line households — one of the largest clean cooking transitions in history. The lesson: distribution isn't enough. Electric cooking has an inherent advantage — once paid off, the marginal cost is near-zero if solar-powered. There's no "refill" problem.</p>
+        </div>
+
+        <div class="mechanism-card">
+          <div class="mechanism-number">04</div>
+          <h3>Multilateral & Development Finance</h3>
+          <p>The IEA's 2024 Summit on Clean Cooking in Africa pledged <strong>$2.2 billion</strong>. The World Bank estimates universal modern energy cooking services require <strong>$150 billion per year</strong> — current funding is an order of magnitude short. The $2.2 billion was a down payment, not a solution.</p>
+        </div>
+
+        <div class="mechanism-card">
+          <div class="mechanism-number">05</div>
+          <h3>Product Design for Affordability — The DC Revolution</h3>
+          <p>Efficient DC appliances — designed to run directly from solar panels without AC-DC conversion losses — are transforming off-grid settings. Reducing the appliance load by 50% can reduce the <strong>total system cost by 30–40%</strong>. DC ceiling fans draw 15–25W instead of 75W.</p>
+        </div>
+      </div>
+
+      <div class="chart-box">
+        <div class="chart-box-header"><span class="chart-box-title">Investment Gap: Clean Cooking Access</span></div>
+        <canvas id="investmentGapChart" role="img" aria-label="Bar chart showing $150 billion annual investment needed vs. $2.2 billion pledged at Paris Summit"></canvas>
+        <figcaption>Source: World Bank/ESMAP, IEA Clean Cooking Summit (2024). The gap is roughly 68×.</figcaption>
+      </div>
+    </section>
+
+    <!-- ENABLING INFRASTRUCTURE -->
+    <section class="content-section" id="infrastructure">
+      <h2>Part 4: The Enabling Infrastructure</h2>
+      <p>Appliances don't work without power. And power alone doesn't guarantee adoption. Roughly <strong>655 million people</strong> still lack electricity access entirely. Hundreds of millions more have unreliable grid connections.</p>
+
+      <div class="callout clean">
+        <p><strong>Universal appliance access depends on universal electricity access, but the relationship is bidirectional:</strong> household demand for appliances (cooking, cooling, refrigeration, connectivity) is what makes electricity access economically valuable.</p>
+      </div>
+
+      <div class="chart-box">
+        <div class="chart-box-header"><span class="chart-box-title">Global Electricity Access Tiers</span></div>
+        <canvas id="electricityAccessChart" role="img" aria-label="Stacked bar chart showing electricity access tiers: 655M without access, hundreds of millions with unreliable access, and the rest with reliable access"></canvas>
+        <figcaption>Source: IEA, World Bank/ESMAP Multi-Tier Framework. The three-tier solution: grid extension, mini-grids, and solar home systems.</figcaption>
+      </div>
+
+      <p>Battery-supported electric cooking is an emerging model: a solar home system sized for lighting, phone charging, and a few hours of cooking per day — enabled by falling lithium battery costs and EPC efficiency. <strong>Battery-swap models</strong>, where households exchange depleted batteries for charged ones at local kiosks, eliminate the need for each household to own its own storage.</p>
+    </section>
+
+    <!-- POLICY SECTION -->
+    <section class="content-section" id="policy">
+      <h2>Part 5: The Policy Package — Seven Actions</h2>
+      <p class="section-intro">What would a serious effort to make electric cooking and portable cooling universally accessible look like? Seven interconnected actions.</p>
+
+      <ol class="policy-list">
+        <li>
+          <div class="policy-num">1</div>
+          <div class="policy-content">
+            <h4>Bundle Appliance Financing with Energy Access</h4>
+            <p>Every electrification program should include an appliance financing component. Integrating EPCs, efficient refrigerators, and fans into the same PAYG contract that finances the power system converts energy access into energy use.</p>
+            <p class="policy-who">Who should act: Development finance institutions, mini-grid developers, PAYG companies.</p>
+          </div>
+        </li>
+        <li>
+          <div class="policy-num">2</div>
+          <div class="policy-content">
+            <h4>Build the Carbon Market Bridge for Cooling</h4>
+            <p>Carbon finance is mature for cooking but embryonic for cooling. The Cool Coalition, Gold Standard, and Verra should develop methodologies for efficient cooling access projects — crediting emissions avoided when households switch to super-efficient, renewable-powered units.</p>
+            <p class="policy-who">Who should act: Carbon market standard-setters, Clean Cooling Collaborative, national carbon market authorities.</p>
+          </div>
+        </li>
+        <li>
+          <div class="policy-num">3</div>
+          <div class="policy-content">
+            <h4>Mandate Minimum Efficiency, Subsidize the Best</h4>
+            <p>The average AC sold is less than half as efficient as what's already on the shelf. Minimum Energy Performance Standards (MEPS) can eliminate the worst units. "Super-efficient" subsidy programs can make the best technology affordable.</p>
+            <p class="policy-who">Who should act: National energy ministries, standards bodies, the Cool Coalition's MEPS working group.</p>
+          </div>
+        </li>
+        <li>
+          <div class="policy-num">4</div>
+          <div class="policy-content">
+            <h4>Design for Fuel Stacking, Not Abstinence</h4>
+            <p>Most households use multiple fuels, and clean cooking adoption is gradual. Programs should embrace this — financing EPCs for daily dishes while biomass or LPG covers occasional high-heat cooking — rather than demanding an unrealistic overnight switch.</p>
+            <p class="policy-who">Who should act: Appliance designers, program implementers, behavior change researchers at MECS and CCA.</p>
+          </div>
+        </li>
+        <li>
+          <div class="policy-num">5</div>
+          <div class="policy-content">
+            <h4>Deploy Passive Cooling as the First Line of Defense</h4>
+            <p>Before installing an AC, make the building need less cooling. Cool roof programs, urban tree canopy expansion, shading and natural ventilation in building codes, and public cooling centers are cheaper, faster, and lower-carbon than mechanical cooling.</p>
+            <p class="policy-who">Who should act: Municipal governments, housing authorities, urban planners.</p>
+          </div>
+        </li>
+        <li>
+          <div class="policy-num">6</div>
+          <div class="policy-content">
+            <h4>Use the WHO Hybrid: 27°C + Fan</h4>
+            <p>Setting the thermostat to 27°C (81°F) and using an electric fan makes the room feel 4°C cooler and can cut cooling electricity use by up to 70%. This should be standard public health guidance in every heat-vulnerable region.</p>
+            <p class="policy-who">Who should act: National and municipal health authorities, the Global Heat Health Information Network (GHHIN).</p>
+          </div>
+        </li>
+        <li>
+          <div class="policy-num">7</div>
+          <div class="policy-content">
+            <h4>Treat This as a Climate Emergency — and Fund It Accordingly</h4>
+            <p>The $150 billion annual investment need dwarfs current commitments by an order of magnitude. But it's small in the context of global energy investment (~$2.8 trillion annually) and tiny compared to the ~$2.4 trillion per year in economic costs from household air pollution alone.</p>
+            <p class="policy-who">Who should act: G20 governments, multilateral development banks, climate funds, and institutional investors.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- CONCLUSION -->
+    <section class="content-section" id="conclusion">
+      <div class="conclusion-box">
+        <h2>Conclusion: From Vicious to Virtuous</h2>
+        <p>The technologies to solve the cooking and cooling crisis exist, are commercially available, and are improving rapidly. The financing models — PAYG, carbon credits, blended capital, smart subsidy — have been proven at scale. The policy frameworks — integrated energy planning, MEPS, Kigali Amendment compliance — are in place or under development.</p>
+        <p>What's been missing is the recognition that these are <strong>not separate problems</strong>. Clean cooking and efficient cooling are two sides of the same coin: both reduce emissions, both save lives, both depend on the same distribution infrastructure, and both are enabled by the same revolution in cheap solar electricity and efficient DC appliances.</p>
+        <p>The path from 2 billion people cooking with wood and 1 billion without adequate cooling to universal access is not a mystery. <strong>It's a supply chain and a financing problem with known solutions.</strong> The question is whether we deploy those solutions at the speed and scale the crisis demands.</p>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <p class="site-footer-brand">H Heuristics</p>
+      <h4>Sources</h4>
+      <p>IEA — <em>A Vision for Clean Cooking Access for All</em> (2023); <em>Clean Cooking in Africa</em> (2026); <em>The Future of Cooling</em> (2018). WHO — <em>Household Air Pollution Fact Sheet</em> (Dec 2025); <em>Heat and Health Fact Sheet</em> (April 2026). SEforALL — <em>Chilling Prospects</em> (2023); <em>eCooking Practical Guide</em> (April 2026). MECS/Modern Energy Cooking Services. Clean Cooking Alliance. Clean Cooling Collaborative / ClimateWorks Foundation. UNEP OzonAction. World Bank / ESMAP. GOGLA. <em>The Lancet Planetary Health.</em> <em>The Lancet Countdown.</em></p>
+      <p style="margin-top:1.5rem">© 2026 <a href="https://www.hheuristics.com">H Heuristics</a>. Navigating a changing world. <a href="https://hheuristics.substack.com">Substack</a> · <a href="https://www.hheuristics.com">Website</a></p>
+    </footer>
+  </div>
+
+  <!-- DASHBOARD SIDEBAR -->
+  <aside class="dashboard-col" id="dashboardCol">
+    <div class="dashboard-fixed" id="dashboardFixed">
+      <div class="dashboard-header">
+        <span class="dashboard-title">Live Data Companion</span>
+      </div>
+
+      <div class="dashboard-tabs" role="tablist" aria-label="Dashboard view">
+        <button class="dashboard-tab active" role="tab" data-view="overview">Overview</button>
+        <button class="dashboard-tab" role="tab" data-view="cooking">Cooking</button>
+        <button class="dashboard-tab" role="tab" data-view="cooling">Cooling</button>
+      </div>
+
+      <div class="dashboard-kpis">
+        <div class="dashboard-kpi">
+          <div class="dashboard-kpi-value" style="color:var(--c-accent-cooking)">2.1–2.3B</div>
+          <div class="dashboard-kpi-label">Cook with polluting fuels</div>
+        </div>
+        <div class="dashboard-kpi">
+          <div class="dashboard-kpi-value" style="color:var(--c-accent-cooling)">1.12B</div>
+          <div class="dashboard-kpi-label">At risk from lack of cooling</div>
+        </div>
+        <div class="dashboard-kpi">
+          <div class="dashboard-kpi-value" style="color:var(--c-accent-cooking)">2.9M</div>
+          <div class="dashboard-kpi-label">Deaths/year — indoor air pollution</div>
+        </div>
+        <div class="dashboard-kpi">
+          <div class="dashboard-kpi-value" style="color:var(--c-accent-cooling)">489K</div>
+          <div class="dashboard-kpi-label">Deaths/year — extreme heat</div>
+        </div>
+      </div>
+
+      <div class="dashboard-chart">
+        <div class="dashboard-chart-title">Annual Impact Potential</div>
+        <canvas id="dashboardImpactChart" role="img" aria-label="Horizontal bar chart comparing deaths averted, CO2 abated, and investment gap"></canvas>
+      </div>
+
+      <div class="dashboard-chart">
+        <div class="dashboard-chart-title">Key Metrics at a Glance</div>
+        <canvas id="dashboardMetricsChart" role="img" aria-label="Donut chart showing the proportion of black carbon from residential burning vs other sources"></canvas>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Mobile Dashboard Button -->
+  <button class="dashboard-mobile-btn" id="mobileDashboardBtn" aria-label="Open dashboard">📊</button>
+  <div class="dashboard-mobile-overlay" id="mobileDashboardOverlay"></div>
+</div>
+
+<script>
+// ===== THEME TOGGLE =====
+const themeToggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') { html.classList.add('dark'); html.classList.remove('light'); themeToggle.textContent = '🌙'; }
+else { themeToggle.textContent = '☀️'; }
+themeToggle.addEventListener('click', () => {
+  if (html.classList.contains('dark')) {
+    html.classList.remove('dark'); html.classList.add('light');
+    themeToggle.textContent = '☀️'; localStorage.setItem('theme','light');
+  } else {
+    html.classList.add('dark'); html.classList.remove('light');
+    themeToggle.textContent = '🌙'; localStorage.setItem('theme','dark');
+  }
+  updateChartColors();
+});
+
+// ===== MOBILE DASHBOARD =====
+const dashboardCol = document.getElementById('dashboardCol');
+const mobileBtn = document.getElementById('mobileDashboardBtn');
+const mobileOverlay = document.getElementById('mobileDashboardOverlay');
+function isMobile() { return window.innerWidth <= 1024; }
+function openMobileDashboard() { dashboardCol.classList.add('mobile-open'); mobileOverlay.classList.add('active'); }
+function closeMobileDashboard() { dashboardCol.classList.remove('mobile-open'); mobileOverlay.classList.remove('active'); }
+mobileBtn.addEventListener('click', () => {
+  if (dashboardCol.classList.contains('mobile-open')) closeMobileDashboard();
+  else openMobileDashboard();
+});
+mobileOverlay.addEventListener('click', closeMobileDashboard);
+
+// ===== DASHBOARD TABS =====
+const dashboardTabs = document.querySelectorAll('.dashboard-tab');
+dashboardTabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    dashboardTabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    updateDashboardView(tab.dataset.view);
+  });
+});
+
+function updateDashboardView(view) {
+  const kpis = document.querySelectorAll('.dashboard-kpi');
+  const idxMap = { overview: 0, cooking: 1, cooling: 2 };
+  // Highlight relevant KPIs based on view — subtle visual change
+  kpis.forEach((kpi,i) => {
+    const val = kpi.querySelector('.dashboard-kpi-value');
+    if (view === 'overview') { val.style.opacity = '1'; }
+    else if (view === 'cooking' && (i === 0 || i === 2)) { val.style.opacity = '1'; }
+    else if (view === 'cooling' && (i === 1 || i === 3)) { val.style.opacity = '1'; }
+    else { val.style.opacity = '0.35'; }
+  });
+}
+
+// ===== COLOR SYSTEM =====
+function getChartColors() {
+  const isDark = html.classList.contains('dark');
+  return {
+    cooking: '#c2410c',
+    cooling: '#0369a1',
+    clean: '#0d9488',
+    cookingLight: 'rgba(194,65,12,0.15)',
+    coolingLight: 'rgba(3,105,161,0.15)',
+    cleanLight: 'rgba(13,148,136,0.15)',
+    grid: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)',
+    text: isDark ? '#a8a8a4' : '#5c5c5c',
+    surface: isDark ? '#1c1c1a' : '#ffffff',
+  };
+}
+
+Chart.defaults.color = '#5c5c5c';
+Chart.defaults.borderColor = 'rgba(0,0,0,0.06)';
+Chart.defaults.font.family = "'Inter',system-ui,sans-serif";
+Chart.defaults.font.size = 11;
+Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(26,26,26,0.9)';
+Chart.defaults.plugins.tooltip.titleFont = { family: "'Inter',system-ui,sans-serif", size: 12, weight: '600' };
+Chart.defaults.plugins.tooltip.bodyFont = { family: "'Inter',system-ui,sans-serif", size: 11 };
+Chart.defaults.plugins.tooltip.padding = 10;
+Chart.defaults.plugins.tooltip.cornerRadius = 6;
+
+function updateChartColors() {
+  Object.values(charts).forEach(c => {
+    if (c && c.options) {
+      c.options.scales = c.origScales;
+      c.update();
+    }
+  });
+}
+
+const charts = {};
+
+// ===== CHART 1: Disease Burden (Horizontal Bar) =====
+(function(){
+  const ctx = document.getElementById('diseaseBurdenChart');
+  if (!ctx) return;
+  const diseases = [
+    { label: 'Ischemic Heart Disease', pct: 32, color: '#c2410c' },
+    { label: 'Stroke', pct: 23, color: '#d97706' },
+    { label: 'Lower Respiratory Infections', pct: 21, color: '#dc2626' },
+    { label: 'COPD', pct: 19, color: '#9a3412' },
+    { label: 'Lung Cancer', pct: 6, color: '#7c2d12' },
+  ];
+  charts.diseaseBurden = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: diseases.map(d => d.label),
+      datasets: [{
+        data: diseases.map(d => d.pct),
+        backgroundColor: diseases.map(d => d.color),
+        borderRadius: 4,
+        borderSkipped: false,
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { max: 35, ticks: { callback: v => v + '%' }, grid: { color: getChartColors().grid } },
+        y: { grid: { display: false } }
+      }
+    }
+  });
+})();
+
+// ===== CHART 2: Cooking Efficiency (Bar) =====
+(function(){
+  const ctx = document.getElementById('cookingEfficiencyChart');
+  if (!ctx) return;
+  const techs = [
+    { label: 'Induction', eff: 85, color: '#0d9488' },
+    { label: 'Electric Pressure Cooker', eff: 75, color: '#0d9488' },
+    { label: 'Conventional Electric', eff: 70, color: '#5c5c5c' },
+    { label: 'Gas', eff: 40, color: '#d97706' },
+    { label: 'Biomass', eff: 15, color: '#c2410c' },
+  ];
+  charts.cookingEfficiency = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: techs.map(t => t.label),
+      datasets: [{
+        label: 'Energy Efficiency (%)',
+        data: techs.map(t => t.eff),
+        backgroundColor: techs.map(t => t.color),
+        borderRadius: 6,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { max: 100, ticks: { callback: v => v + '%' }, grid: { color: getChartColors().grid } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+})();
+
+// ===== CHART 3: AC Stock Growth (Line) =====
+(function(){
+  const ctx = document.getElementById('acGrowthChart');
+  if (!ctx) return;
+  const years = ['2025','2030','2035','2040','2045','2050'];
+  const baseline = [2.0, 2.8, 3.7, 4.5, 5.3, 6.0];
+  const efficient = [2.0, 2.6, 3.1, 3.6, 4.1, 4.5];
+  charts.acGrowth = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: years,
+      datasets: [
+        { label: 'Current Trajectory', data: baseline, borderColor: '#c2410c', backgroundColor: 'rgba(194,65,12,0.08)', fill: true, tension: 0.3, borderWidth: 2, pointRadius: 4, pointBackgroundColor: '#c2410c' },
+        { label: 'Efficient Cooling Scenario', data: efficient, borderColor: '#0d9488', backgroundColor: 'rgba(13,148,136,0.08)', fill: true, tension: 0.3, borderWidth: 2, pointRadius: 4, pointBackgroundColor: '#0d9488', borderDash: [6,3] },
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } } },
+      scales: {
+        y: { title: { display: true, text: 'Billion Units' }, grid: { color: getChartColors().grid } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+})();
+
+// ===== CHART 4: Investment Gap (Bar) =====
+(function(){
+  const ctx = document.getElementById('investmentGapChart');
+  if (!ctx) return;
+  charts.investmentGap = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Pledged (Paris 2024)', 'Needed Annually'],
+      datasets: [{
+        data: [2.2, 150],
+        backgroundColor: ['#0d9488', '#c2410c'],
+        borderRadius: 6,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => '$' + ctx.raw + 'B' } } },
+      scales: {
+        y: { type: 'logarithmic', title: { display: true, text: 'USD Billions (log scale)' }, ticks: { callback: v => '$' + v + 'B' }, grid: { color: getChartColors().grid } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+})();
+
+// ===== CHART 5: Electricity Access (Stacked Bar) =====
+(function(){
+  const ctx = document.getElementById('electricityAccessChart');
+  if (!ctx) return;
+  charts.electricityAccess = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Global Population'],
+      datasets: [
+        { label: 'No Access', data: [0.655], backgroundColor: '#c2410c' },
+        { label: 'Unreliable Access', data: [1.5], backgroundColor: '#d97706' },
+        { label: 'Reliable Access', data: [5.845], backgroundColor: '#0d9488' },
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      indexAxis: 'y',
+      plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 16 } }, tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.raw + 'B' } } },
+      scales: {
+        x: { stacked: true, title: { display: true, text: 'Billions of People' }, ticks: { callback: v => v + 'B' }, grid: { color: getChartColors().grid } },
+        y: { stacked: true, grid: { display: false } }
+      }
+    }
+  });
+})();
+
+// ===== CHART 6: Dashboard Impact (Horizontal Bar) =====
+(function(){
+  const ctx = document.getElementById('dashboardImpactChart');
+  if (!ctx) return;
+  charts.dashboardImpact = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Deaths Averted (M/yr)', 'CO₂ Abated (Gt/yr)', 'Black Carbon Cut (%)'],
+      datasets: [{
+        data: [3.5, 2.5, 25],
+        backgroundColor: ['#c2410c','#0d9488','#0369a1'],
+        borderRadius: 3,
+        borderSkipped: false,
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { color: getChartColors().grid }, ticks: { font: { size: 9 } } },
+        y: { grid: { display: false }, ticks: { font: { size: 9 } } }
+      }
+    }
+  });
+})();
+
+// ===== CHART 7: Dashboard Donut =====
+(function(){
+  const ctx = document.getElementById('dashboardMetricsChart');
+  if (!ctx) return;
+  charts.dashboardMetrics = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Residential Solid Fuel', 'Transport', 'Industry', 'Other'],
+      datasets: [{
+        data: [25, 30, 28, 17],
+        backgroundColor: ['#c2410c','#d97706','#0369a1','#8c8c8c'],
+        borderWidth: 1,
+        borderColor: '#fbfbf9',
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: {
+        legend: { position: 'bottom', labels: { padding: 10, font: { size: 9 }, usePointStyle: true } }
+      }
+    }
+  });
+})();
+
+// ===== Handle resize for mobile dashboard =====
+window.addEventListener('resize', () => {
+  if (!isMobile()) closeMobileDashboard();
+});
+
+console.log('The Twin Levers — H Heuristics — interactive site ready.');
+</script>
+</body>
+</html>
