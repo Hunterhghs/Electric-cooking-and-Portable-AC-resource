@@ -9,21 +9,20 @@ An interactive resource by **H Heuristics** exploring how universal access to el
 - **~25%** of global black carbon emissions eliminated
 - Up to **0.5°C** of warming avoided by 2100
 
-## Sections
+## Views
 
-1. **The Scale of the Problem** — Cooking crisis (2.1–2.3B using polluting fuels) and cooling gap (1.12B at risk)
-2. **The Technologies** — Electric pressure cookers, induction, efficient AC, passive cooling
-3. **Distribution Architecture** — PAYG financing, carbon markets, subsidies, multilateral finance, DC appliances
-4. **Enabling Infrastructure** — Electricity access tiers, battery-supported cooking, integrated energy planning
-5. **Policy Package** — Seven interconnected actions for universal access
+- **Overview** — Comprehensive landing page with hero stats, cooking and cooling crisis deep-dives, vicious/virtuous cycle, solution architecture, and explore CTAs
+- **Dashboard** — Interactive data view with 3 charts (Disease Burden, Investment Gap, Black Carbon Sources), 4 KPI cards, and filter tabs (All / Cooking / Cooling)
+- **Digital Report** — Full 5-part narrative analysis with 3 inline contextual charts (Cooking Efficiency, AC Stock Projection, Electricity Access Tiers)
+- **Informational** — About this resource, H Heuristics background, site guide, and key sources
 
 ## Features
 
-- 📊 **Interactive dashboard** (fixed sidebar on desktop, slide-out on mobile)
-- 📈 **7 data visualizations** powered by Chart.js
-- 🌓 **Dark/light mode** with persisted preference
-- 📱 **Fully responsive** — editorial reading layout with data companion
-- ♿ **Accessible** — semantic HTML, ARIA labels, keyboard-navigable charts
+- **6 interactive charts** powered by Chart.js — Dashboard (3) and Report (3) each have unique visuals
+- **Filterable dashboard** — tabs show/hide charts by category (All / Cooking / Cooling)
+- **Arrow-key navigation** — full keyboard support on tab interfaces per WAI-ARIA patterns
+- **Fully responsive** — editorial reading layout, mobile-optimized
+- **Accessible** — semantic HTML, ARIA landmarks and labels, focus-visible, skip link, prefers-reduced-motion, WCAG 2.1 AA contrast ratios
 
 ## Deployment
 
