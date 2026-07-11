@@ -393,20 +393,8 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
         <canvas id="dashDiseaseChart" role="img" aria-label="Horizontal bar chart: Ischemic heart disease 32%, Stroke 23%, LRI 21%, COPD 19%, Lung cancer 6%"></canvas>
       </div>
       <div class="dash-chart-card" data-category="cooking">
-        <div class="dash-chart-title">Cooking Technology Efficiency</div>
-        <canvas id="dashEfficiencyChart" role="img" aria-label="Bar chart: Induction 85%, EPC 75%, Conventional Electric 70%, Gas 40%, Biomass 15%"></canvas>
-      </div>
-      <div class="dash-chart-card" data-category="cooling">
-        <div class="dash-chart-title">Global AC Stock Projection (2025–2050)</div>
-        <canvas id="dashAcChart" role="img" aria-label="Line chart showing AC stock tripling from 2B to 6B units by 2050 under current trajectory vs efficient scenario"></canvas>
-      </div>
-      <div class="dash-chart-card" data-category="cooking">
         <div class="dash-chart-title">Clean Cooking Investment Gap</div>
         <canvas id="dashInvestmentChart" role="img" aria-label="Bar chart: $2.2B pledged vs $150B needed annually"></canvas>
-      </div>
-      <div class="dash-chart-card" data-category="cooling">
-        <div class="dash-chart-title">Global Electricity Access Tiers</div>
-        <canvas id="dashElectricityChart" role="img" aria-label="Stacked bar: 655M no access, 1.5B unreliable, 5.8B reliable"></canvas>
       </div>
       <div class="dash-chart-card" data-category="all">
         <div class="dash-chart-title">Global Black Carbon Sources</div>
@@ -461,6 +449,12 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
 
       <p><strong>Induction cooktops</strong> offer faster, more controllable cooking with ~85% energy efficiency (vs. ~40% for gas). Prices for single-burner induction units have fallen below $30 in many markets. <strong>Rice cookers and multicookers</strong> (300–500W) are already ubiquitous across Asia and make natural entry points for electric cooking transitions.</p>
 
+      <div class="report-chart-box">
+        <div class="report-chart-title">Cooking Technology Efficiency Comparison</div>
+        <canvas id="reportEfficiencyChart" role="img" aria-label="Bar chart: Induction 85%, EPC 75%, Conventional Electric 70%, Gas 40%, Biomass 15%"></canvas>
+        <figcaption>Source: MECS, SEforALL eCooking Practical Guide (2026). EPCs cut cooking energy by 50–70% vs. conventional stoves.</figcaption>
+      </div>
+
       <div class="callout clean">
         <p><strong>Key insight:</strong> Fuel stacking is normal and should be designed for, not fought. Households rarely switch overnight from biomass to electric. They add electric cooking for some meals while keeping biomass for others. The transition is gradual.</p>
       </div>
@@ -471,6 +465,12 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
       <p>The WHO recommends a hybrid approach: set AC thermostats to 27°C (81°F) with an electric fan, which <strong>makes the room feel 4°C cooler and can save up to 70% on cooling electricity</strong>. Passive strategies — cool roofs, reflective materials, urban tree canopy, natural ventilation — reduce or eliminate the need for mechanical cooling in the first place.</p>
 
       <p><strong>Portable AC as a transitional tool:</strong> While less efficient than mini-splits, portable and window units fill a critical gap. For the urban poor living in informal settlements with metal roofs and no insulation — the populations most exposed to extreme heat — a portable unit may be the only viable cooling option in the near term.</p>
+
+      <div class="report-chart-box">
+        <div class="report-chart-title">Global AC Stock Projection (2025–2050)</div>
+        <canvas id="reportAcChart" role="img" aria-label="Line chart showing AC stock tripling from 2B to 6B units by 2050 under current trajectory vs efficient scenario"></canvas>
+        <figcaption>Source: IEA The Future of Cooling (2018). Current trajectory vs. Efficient Cooling Scenario.</figcaption>
+      </div>
     </div>
 
     <!-- Part 3 -->
@@ -491,6 +491,12 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
     <div class="report-section">
       <h2>Part 4: The Enabling Infrastructure</h2>
       <p>Appliances don't work without power. Roughly <strong>655 million people</strong> still lack electricity access entirely. Hundreds of millions more have unreliable grid connections. The three-tier solution: grid extension for dense areas, mini-grids for rural towns, and solar home systems for dispersed households.</p>
+
+      <div class="report-chart-box">
+        <div class="report-chart-title">Global Electricity Access Tiers</div>
+        <canvas id="reportElectricityChart" role="img" aria-label="Stacked bar: 655M no access, 1.5B unreliable, 5.8B reliable"></canvas>
+        <figcaption>Source: IEA, World Bank/ESMAP Multi-Tier Framework.</figcaption>
+      </div>
 
       <div class="callout clean">
         <p><strong>Universal appliance access depends on universal electricity access, but the relationship is bidirectional:</strong> household demand for appliances is what makes electricity access economically valuable.</p>
@@ -820,11 +826,12 @@ function createBlackCarbonChart(canvasId) {
 function initAllCharts() {
   // Dashboard view charts
   createDiseaseChart('dashDiseaseChart');
-  createEfficiencyChart('dashEfficiencyChart');
-  createAcChart('dashAcChart');
   createInvestmentChart('dashInvestmentChart');
-  createElectricityChart('dashElectricityChart');
   createBlackCarbonChart('dashBlackCarbonChart');
+  // Report view charts
+  createEfficiencyChart('reportEfficiencyChart');
+  createAcChart('reportAcChart');
+  createElectricityChart('reportElectricityChart');
 }
 
 // Initialize when Chart.js is available
